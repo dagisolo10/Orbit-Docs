@@ -1,0 +1,1082 @@
+import type { DocPage } from "@/content/docs/types";
+
+export const docsPages: DocPage[] = [
+    {
+        slug: "introduction",
+        title: "Introduction to Orbit",
+        description: "Orbit is a local, offline project workspace for developers. Learn what it does, the problems it solves, and the principles behind it.",
+        group: "Getting started",
+        eyebrow: "Documentation",
+        blocks: [
+            {
+                type: "paragraph",
+                text: "**Orbit is a local project workspace for developers.** It scans a directory on your machine, finds every project, works out which technologies each one uses, and turns all of it into a fast, searchable, offline dashboard.",
+            },
+            {
+                type: "paragraph",
+                text: "There are no accounts, no cloud, and no telemetry — just a clear view of the code already living on your disk. Orbit is built with Electron, React, and TypeScript, and ships a dark interface tuned for long working sessions.",
+            },
+            {
+                type: "callout",
+                variant: "tip",
+                title: "Everything stays local",
+                text: "Orbit reads `package.json` files and opens folders using your existing tools. It never uploads your code, paths, or project names anywhere.",
+            },
+            { type: "heading", text: "The problem Orbit solves" },
+            {
+                type: "paragraph",
+                text: "If you keep dozens of side projects, prototypes, and experiments in one folder, it gets hard to remember what is what. Orbit answers questions like:",
+            },
+            {
+                type: "list",
+                items: [
+                    "What projects do I have, and where are they?",
+                    "Which ones use React, Prisma, Tailwind, or Vite?",
+                    "What was I working on most recently?",
+                    "Which projects do I keep coming back to?",
+                ],
+            },
+            { type: "heading", text: "What you get" },
+            {
+                type: "cards",
+                items: [
+                    { title: "Automatic discovery", description: "Recursively scan a folder for projects and read their manifests.", href: "/docs/features" },
+                    { title: "Technology detection", description: "See the real stack behind every project, grouped by category.", href: "/docs/technology-detection" },
+                    { title: "Workspace awareness", description: "Monorepos and multi-package workspaces are grouped automatically.", href: "/docs/workspaces" },
+                    { title: "Quick actions", description: "Open any project in your editor, terminal, or file manager.", href: "/docs/opening-projects" },
+                ],
+            },
+            { type: "heading", text: "Principles" },
+            {
+                type: "list",
+                items: [
+                    "**Local-first** — the filesystem never leaves your machine.",
+                    "**Offline by default** — no network access is required at runtime.",
+                    "**Honest data** — Orbit only reports technologies it can actually find in dependencies.",
+                    "**Small and predictable** — a narrow, secure electron architecture with no unnecessary dependencies.",
+                ],
+            },
+            { type: "heading", text: "Where to go next" },
+            {
+                type: "list",
+                items: [
+                    "[Install Orbit](/docs/installation) and get it running on Linux.",
+                    "[Check supported projects](/docs/supported-projects) to confirm Orbit can detect your work.",
+                    "[Follow the quick start](/docs/getting-started) to run your first scan.",
+                    "[Tour the features](/docs/features) to see everything Orbit can do.",
+                    "[Read the architecture](/docs/architecture) if you plan to contribute.",
+                ],
+            },
+        ],
+    },
+    {
+        slug: "installation",
+        title: "Installation",
+        description: "Install Orbit on Linux, macOS, or Windows — download a prebuilt release, or build it from source with Bun or npm.",
+        group: "Getting started",
+        blocks: [
+            {
+                type: "paragraph",
+                text: "Orbit ships as a desktop application. On Linux you can run the portable AppImage, install a native package for your distribution, or build from source. macOS and Windows builds are not attached to releases yet.",
+            },
+            {
+                type: "callout",
+                variant: "warning",
+                title: "Fits JavaScript and TypeScript projects only",
+                text: "Orbit detects projects by their `package.json`. If your work is mainly Python, Rust, Go, Java, or another ecosystem, Orbit will not see it yet. Read [Supported projects & limitations](/docs/supported-projects) before installing.",
+            },
+            { type: "heading", text: "Requirements" },
+            {
+                type: "list",
+                items: [
+                    "**Linux** — prebuilt AppImage, deb, and pacman packages are provided today.",
+                    "**Node.js 20 or newer**, or **[Bun](https://bun.sh/)** — needed to build or run from source. The repository ships a `bun.lock`.",
+                ],
+            },
+            {
+                type: "callout",
+                variant: "note",
+                title: "No global tooling",
+                text: "Orbit does not need any global CLI tools, accounts, or network access at runtime.",
+            },
+            { type: "heading", text: "AppImage (recommended)" },
+            {
+                type: "paragraph",
+                text: "The AppImage is a single portable executable and the recommended download for most Linux users. It needs no installation — download it from the [releases page](/releases), make it executable, and run it.",
+            },
+            {
+                type: "steps",
+                items: [
+                    { title: "Download the AppImage", description: "Grab `Orbit-1.0.0.AppImage` from the [releases page](/releases)." },
+                    { title: "Open a terminal in the download folder", description: "For example, `cd ~/Downloads`." },
+                    { title: "Make it executable", description: "Run `chmod +x Orbit-1.0.0.AppImage`." },
+                    { title: "Run Orbit", description: "Run `./Orbit-1.0.0.AppImage`." },
+                ],
+            },
+            {
+                type: "code",
+                lang: "bash",
+                title: "AppImage",
+                code: ["chmod +x Orbit-1.0.0.AppImage", "./Orbit-1.0.0.AppImage"].join("\n"),
+            },
+            {
+                type: "callout",
+                variant: "warning",
+                title: "AppImage compatibility varies",
+                text: "AppImages depend on your Linux environment and its system libraries. Orbit expects a reasonably recent desktop with common libraries such as FUSE for AppImage mounting and a working graphics stack. Compatibility is not universal — if the AppImage will not start, use the package for your distribution or build from source.",
+            },
+            { type: "heading", text: "Debian / Ubuntu (.deb)" },
+            {
+                type: "paragraph",
+                text: "For Ubuntu, Debian, Linux Mint, Pop!_OS, and other Debian-based distributions, install the `.deb` with `apt` so dependencies resolve automatically:",
+            },
+            {
+                type: "code",
+                lang: "bash",
+                title: "Debian / Ubuntu",
+                code: ["sudo apt install ./Orbit-1.0.0.deb"].join("\n"),
+            },
+            {
+                type: "paragraph",
+                text: "If your system cannot install local files directly, use `sudo dpkg -i Orbit-1.0.0.deb`, then run `sudo apt-get install -f` to fix any missing dependencies.",
+            },
+            { type: "heading", text: "Arch Linux (pacman)" },
+            {
+                type: "paragraph",
+                text: "For Arch Linux and compatible distributions, install the package with `pacman`:",
+            },
+            {
+                type: "code",
+                lang: "bash",
+                title: "Arch Linux",
+                code: ["sudo pacman -U Orbit-1.0.0.pacman"].join("\n"),
+            },
+            {
+                type: "callout",
+                variant: "note",
+                text: "The pacman package is built against Arch's rolling libraries. On other distributions, prefer the AppImage or build from source.",
+            },
+            { type: "heading", text: "Build from source" },
+            {
+                type: "paragraph",
+                text: "Clone the repository and install dependencies with your package manager of choice. Bun is recommended because it matches the committed lockfile.",
+            },
+            {
+                type: "code",
+                lang: "bash",
+                title: "Using Bun (recommended)",
+                code: ["git clone https://github.com/dagisolo10/Orbit.git", "cd Orbit", "bun install"].join("\n"),
+            },
+            {
+                type: "code",
+                lang: "bash",
+                title: "Using npm",
+                code: ["git clone https://github.com/dagisolo10/Orbit.git", "cd Orbit", "npm install"].join("\n"),
+            },
+            { type: "heading", text: "Run it" },
+            {
+                type: "paragraph",
+                text: "Start Orbit in development mode with hot reload:",
+            },
+            {
+                type: "code",
+                lang: "bash",
+                code: ["bun run dev", "# or", "npm run dev"].join("\n"),
+            },
+            {
+                type: "callout",
+                variant: "tip",
+                text: "While developing, press `Ctrl/Cmd + K` to focus the search bar from anywhere in the app.",
+            },
+            { type: "heading", text: "Build a distributable" },
+            {
+                type: "paragraph",
+                text: "To produce a production build or package a platform-specific artifact:",
+            },
+            {
+                type: "code",
+                lang: "bash",
+                code: [
+                    "bun run build          # type-check then build",
+                    "bun run build:unpack   # unpacked build, great for testing",
+                    "bun run build:linux    # Linux packages (AppImage, deb, pacman)",
+                    "bun run build:mac      # macOS DMG",
+                    "bun run build:win      # Windows installer",
+                ].join("\n"),
+            },
+            {
+                type: "callout",
+                variant: "note",
+                title: "Filenames follow the version",
+                text: "Artifacts are named with the product name and version, for example `Orbit-1.0.0.AppImage`. Replace the version with the release you downloaded.",
+            },
+        ],
+    },
+    {
+        slug: "getting-started",
+        title: "Quick start",
+        description: "Run Orbit for the first time: understand the default projects directory, run a scan, and read the overview dashboard.",
+        group: "Getting started",
+        blocks: [
+            {
+                type: "paragraph",
+                text: "This guide takes you from launch to a working dashboard in a few minutes.",
+            },
+            {
+                type: "steps",
+                items: [
+                    {
+                        title: "Confirm your projects directory",
+                        description:
+                            "Orbit scans **`<your home directory>/Projects`** by default. The sidebar shows the active directory, and a green dot means it was found and read successfully. To scan somewhere else, open **Settings → General → Projects directory** and choose **Change folder**.",
+                    },
+                    {
+                        title: "Let the first scan finish",
+                        description: "On launch, Orbit walks the directory, parses every `package.json`, and detects technologies. Loading skeletons are shown while it works.",
+                    },
+                    {
+                        title: "Read the overview",
+                        description:
+                            "The Overview shows project count, workspace count, distinct technologies, the active directory, and when the last scan ran — plus featured projects, top technologies, and workspace cards.",
+                    },
+                    {
+                        title: "Explore your projects",
+                        description: "Open **All Projects** to search, sort, filter, and paginate everything Orbit found.",
+                    },
+                    {
+                        title: "Open something",
+                        description:
+                            "Use the quick actions on any card to open it in your editor, terminal, or file manager. Fine-tune which editor and terminal Orbit uses under **Settings → Applications**.",
+                    },
+                ],
+            },
+            { type: "heading", text: "Understanding the dashboard" },
+            {
+                type: "table",
+                head: ["View", "What it shows"],
+                rows: [
+                    ["Overview", "A snapshot of your whole workspace: counts, featured projects, top technologies, and workspaces."],
+                    ["All Projects", "Standalone projects only, with search, sorting, technology and category filters, and pagination."],
+                    ["Workspaces", "Expandable monorepo groups with expand/collapse-all and the same filters and layouts."],
+                    ["Technologies", "Your stack, grouped by category, with a jump to every project that uses a given technology."],
+                    ["Favorites", "Projects you starred for quick access, including projects inside workspaces."],
+                    ["Settings", "Choose the projects directory to scan and rescan, pick the editor and terminal Orbit opens, and see version and links."],
+                ],
+            },
+            { type: "heading", text: "Choosing a projects folder" },
+            {
+                type: "paragraph",
+                text: "Orbit does not force you to keep everything in `~/Projects`. Open **Settings → General**, then use **Change folder** to pick any directory — an external drive, a different home folder, or a workspace root elsewhere on disk.",
+            },
+            {
+                type: "list",
+                items: [
+                    "The folder you pick is remembered across restarts and used for every future scan.",
+                    "Settings marks the folder **Default** when it is the built-in `~/Projects`, or **Custom** when you have chosen your own.",
+                    "If the folder is missing or unreadable, Orbit flags it **Unavailable** so you can choose another path.",
+                ],
+            },
+            { type: "heading", text: "Rescanning" },
+            {
+                type: "paragraph",
+                text: "Added or changed projects? Hit **Rescan** in the Settings view. Orbit keeps the last good results on screen if a scan fails, so you never lose your place.",
+            },
+            {
+                type: "callout",
+                variant: "tip",
+                title: "Changed the folder?",
+                text: "Choosing a new projects directory triggers a fresh scan automatically, so the dashboard reflects the new location right away.",
+            },
+            { type: "heading", text: "Choosing your editor and terminal" },
+            {
+                type: "paragraph",
+                text: "**Settings → Applications** decides what Orbit opens when you use a quick action. By default Orbit auto-detects the first supported editor and terminal it finds; you can instead pin a known application or enter a custom command. See [Opening projects](/docs/opening-projects).",
+            },
+        ],
+    },
+    {
+        slug: "features",
+        title: "Feature overview",
+        description: "Every Orbit view and capability: overview dashboard, project explorer, workspaces, technologies, favorites, and quick actions.",
+        group: "Using Orbit",
+        blocks: [
+            {
+                type: "paragraph",
+                text: "Orbit is organised into six views, all driven by a single scan of your projects directory.",
+            },
+            { type: "heading", text: "Overview dashboard" },
+            {
+                type: "list",
+                items: [
+                    "Project count, workspace count, and distinct technology count.",
+                    "The active directory and the last scan time.",
+                    "Featured projects, top technologies, and workspace cards for a quick way in.",
+                ],
+            },
+            { type: "heading", text: "Project explorer" },
+            {
+                type: "paragraph",
+                text: "The All Projects view lists standalone projects only. Workspace members live in the Workspaces view to avoid duplication.",
+            },
+            {
+                type: "list",
+                items: [
+                    "**Grid or list view** with a segmented control.",
+                    "**Instant search** by project name and path.",
+                    "**Sorting** by name, path, or technology count.",
+                    "**Filters** by technology and by category.",
+                    "**Pagination** to keep large workspaces fast.",
+                ],
+            },
+            { type: "heading", text: "Technologies explorer" },
+            {
+                type: "paragraph",
+                text: "Browse your stack grouped by category. Selecting a technology or category jumps straight to every project that uses it.",
+            },
+            { type: "heading", text: "Favorites" },
+            {
+                type: "paragraph",
+                text: "Star the projects you use most for quick access. A dedicated Favorites view collects them, including projects that live inside a workspace.",
+            },
+            { type: "heading", text: "Quick actions" },
+            {
+                type: "paragraph",
+                text: "From any project card, list row, or the details modal you can open a single project. Each workspace group offers the same actions against the workspace root. Orbit uses the editor and terminal you chose in Settings, or auto-detects one. See [Opening projects](/docs/opening-projects) for the exact behaviour.",
+            },
+            {
+                type: "list",
+                items: ["Open in editor", "Open in terminal", "Reveal in file manager", "Copy path"],
+            },
+            { type: "heading", text: "Settings" },
+            {
+                type: "paragraph",
+                text: "One Settings view covers where Orbit looks, what it opens, and what version you are running. It is split into three sections.",
+            },
+            {
+                type: "table",
+                head: ["Section", "What you can do"],
+                rows: [
+                    [
+                        "General",
+                        "Choose the projects directory (marked **Default**, **Custom**, or **Unavailable**), re-scan on demand, and see the dark-only theme note.",
+                    ],
+                    [
+                        "Applications",
+                        "Pick the code editor and terminal Orbit launches — auto-detected, a known preset, or a custom command — plus the system file manager.",
+                    ],
+                    ["About", "Read the app version and open the documentation or source repository."],
+                ],
+            },
+            {
+                type: "callout",
+                variant: "note",
+                title: "Dark by design",
+                text: "Orbit ships a single dark theme tuned for long sessions; there is no light mode to switch to.",
+            },
+            { type: "heading", text: "Polished dark UI" },
+            {
+                type: "paragraph",
+                text: "A responsive React + Tailwind interface with skeletons, empty states, and clear error banners. Brand logos for every technology are bundled locally so icons work fully offline.",
+            },
+        ],
+    },
+    {
+        slug: "workspaces",
+        title: "Workspaces",
+        description: "How Orbit detects monorepos and multi-package workspaces, groups their member packages, and keeps standalone projects separate.",
+        group: "Using Orbit",
+        blocks: [
+            {
+                type: "paragraph",
+                text: "Orbit understands monorepos. A workspace root is a directory whose `package.json` declares a `workspaces` field. Orbit treats that root as a container and groups the packages inside it.",
+            },
+            { type: "heading", text: "How detection works" },
+            {
+                type: "list",
+                items: [
+                    "A `package.json` that declares a `workspaces` field is the **only** workspace configuration Orbit recognizes — the npm, Yarn, and Bun convention.",
+                    "A project nested anywhere inside a workspace root is grouped under that workspace.",
+                    "Grouping uses filesystem containment, not the declared `workspaces` globs, so the patterns themselves are not parsed.",
+                    "Workspace roots themselves are never listed as projects.",
+                    "The closest (deepest) enclosing workspace wins, so nested setups resolve predictably.",
+                ],
+            },
+            {
+                type: "callout",
+                variant: "warning",
+                title: "Other monorepo tools are not recognized",
+                text: "`pnpm-workspace.yaml`, `lerna.json`, `rush.json`, Nx, Bazel, and Cargo workspaces are not understood. If a folder has no `package.json` with a `workspaces` field, Orbit does not group its projects — each appears as a separate **standalone** entry in All Projects. See [Supported projects & limitations](/docs/supported-projects).",
+            },
+            {
+                type: "callout",
+                variant: "note",
+                title: "No duplication",
+                text: "Workspace members appear only in the Workspaces view. Standalone projects — those outside any workspace — appear in All Projects.",
+            },
+            { type: "heading", text: "The Workspaces view" },
+            {
+                type: "list",
+                items: [
+                    "Expandable groups with expand/collapse-all.",
+                    "Sort workspaces by name or path.",
+                    "Filter members by technology and category.",
+                    "Grid or list layouts, with each member keeping the full project card and its actions.",
+                ],
+            },
+            { type: "heading", text: "Acting on an entire workspace" },
+            {
+                type: "paragraph",
+                text: "Each workspace group offers the same quick actions as a project — but applied to the workspace root. That makes it easy to open a whole monorepo in your editor or a terminal at once.",
+            },
+            {
+                type: "callout",
+                variant: "tip",
+                title: "Turborepo aware",
+                text: "Orbit detects Turborepo as a technology from a project's dependencies (`turbo`), and its scanner skips common build and cache folders like `dist`, `out`, and `.turbo`.",
+            },
+        ],
+    },
+    {
+        slug: "technology-detection",
+        title: "Technology detection",
+        description: "Browse the full list of technologies Orbit detects, the dependencies that trigger each one, and how categories work.",
+        group: "Using Orbit",
+        blocks: [
+            {
+                type: "paragraph",
+                text: "Detection is driven entirely by dependencies in `package.json`. Orbit reads both `dependencies` and `devDependencies` and matches them against a known technology registry. It never invents technologies it cannot find.",
+            },
+            {
+                type: "callout",
+                variant: "warning",
+                title: "Only JavaScript and TypeScript projects are detected",
+                text: "A `package.json` is the only project marker Orbit recognizes, and the list below is the complete set of technologies it can report. For the full picture of what is and is not supported, see [Supported projects & limitations](/docs/supported-projects).",
+            },
+            { type: "heading", text: "Categories" },
+            {
+                type: "list",
+                items: [
+                    "**Languages** — {icon:typescript} TypeScript. (JavaScript is registered but currently never emitted, because it has no trigger package.)",
+                    "**Frontend** — {icon:react} React, {icon:next} Next.js, {icon:react-native} React Native, {icon:expo} Expo",
+                    "**Backend** — {icon:node} Node.js, {icon:express} Express, {icon:nestjs} NestJS",
+                    "**Styling** — {icon:tailwindcss} Tailwind CSS",
+                    "**Database / ORM** — {icon:prisma} Prisma, {icon:mongoose} Mongoose, {icon:drizzle} Drizzle",
+                    "**Tools** — {icon:vite} Vite, {icon:tanstack-query} TanStack Query, {icon:tanstack-router} TanStack Router, {icon:socketio} Socket.IO, {icon:electron} Electron, {icon:electron-vite} electron-vite, {icon:turborepo} Turborepo, {icon:bun} Bun, {icon:jest} Jest, {icon:vitest} Vitest, {icon:webpack} Webpack, {icon:esbuild} esbuild",
+                ],
+            },
+            { type: "heading", text: "Full registry" },
+            {
+                type: "table",
+                head: ["Technology", "Category", "Triggered by dependency"],
+                rows: [
+                    ["{icon:javascript} JavaScript", "Languages", "(none — currently never detected)"],
+                    ["{icon:typescript} TypeScript", "Languages", "typescript"],
+                    ["{icon:react} React", "Frontend", "react"],
+                    ["{icon:next} Next.js", "Frontend", "next"],
+                    ["{icon:react-native} React Native", "Frontend", "react-native"],
+                    ["{icon:expo} Expo", "Frontend", "expo"],
+                    ["{icon:node} Node.js", "Backend", "express, fastify, @nestjs/core, hono, koa"],
+                    ["{icon:express} Express", "Backend", "express"],
+                    ["{icon:nestjs} NestJS", "Backend", "@nestjs/core"],
+                    ["{icon:tailwindcss} Tailwind CSS", "Styling", "tailwindcss"],
+                    ["{icon:prisma} Prisma", "Database / ORM", "prisma, @prisma/client"],
+                    ["{icon:mongoose} Mongoose", "Database / ORM", "mongoose"],
+                    ["{icon:drizzle} Drizzle", "Database / ORM", "drizzle-orm"],
+                    ["{icon:vite} Vite", "Tools", "vite"],
+                    ["{icon:tanstack-query} TanStack Query", "Tools", "@tanstack/react-query"],
+                    ["{icon:tanstack-router} TanStack Router", "Tools", "@tanstack/react-router"],
+                    ["{icon:socketio} Socket.IO", "Tools", "socket.io, socket.io-client"],
+                    ["{icon:electron} Electron", "Tools", "electron"],
+                    ["{icon:electron-vite} electron-vite", "Tools", "electron-vite"],
+                    ["{icon:turborepo} Turborepo", "Tools", "turbo"],
+                    ["{icon:bun} Bun", "Tools", "bun-types"],
+                    ["{icon:jest} Jest", "Tools", "jest"],
+                    ["{icon:vitest} Vitest", "Tools", "vitest"],
+                    ["{icon:webpack} Webpack", "Tools", "webpack"],
+                    ["{icon:esbuild} esbuild", "Tools", "esbuild"],
+                ],
+                caption: "The technology registry is intentionally data-driven and easy to extend.",
+            },
+            { type: "heading", text: "Logos" },
+            {
+                type: "paragraph",
+                text: "Every technology is shown with its real logo via [Devicon](https://devicon.dev/) (primary) and [Simple Icons](https://simpleicons.org/) (fallback). Both are bundled locally, so icons resolve fully offline. A fallback icon is used for anything without a dedicated mark.",
+            },
+            {
+                type: "callout",
+                variant: "note",
+                title: "Missing a technology?",
+                text: "The registry lives in `src/main/scanner/data.ts`. Adding an entry there — plus an icon mapping in `src/renderer/src/lib/tech-icons.ts` — is all it takes to support a new stack.",
+            },
+        ],
+    },
+    {
+        slug: "supported-projects",
+        title: "Supported projects & limitations",
+        description: "Exactly what Orbit detects today: the only project marker it recognizes, the full technology registry, the one workspace format that works, and everything it cannot see.",
+        group: "Getting started",
+        blocks: [
+            {
+                type: "paragraph",
+                text: "Orbit's detection is deliberately narrow. It recognizes **JavaScript and TypeScript projects** identified by a `package.json` file, and it reports only the technologies held in a **fixed, data-driven registry**. This page documents what Orbit supports today — and, just as importantly, what it does not — so you know what to expect before you rely on it.",
+            },
+            {
+                type: "callout",
+                variant: "warning",
+                title: "Read this before you download",
+                text: "If your projects do not contain a `package.json`, Orbit will not find them. Support for other ecosystems is planned but not implemented. Orbit only reports technologies it can actually match against its registry — it never invents them.",
+            },
+            { type: "heading", text: "What counts as a project" },
+            {
+                type: "paragraph",
+                text: "Orbit's **only** project marker is a `package.json` file. As the scanner walks your projects directory, any folder that directly contains a `package.json` is treated as a project. Nothing else marks a project.",
+            },
+            {
+                type: "list",
+                items: [
+                    "**Only `package.json`** — manifests such as `pyproject.toml`, `requirements.txt`, `Cargo.toml`, `go.mod`, `pom.xml`, `build.gradle`, `Gemfile`, `composer.json`, or `*.csproj` are ignored entirely.",
+                    "A project's display name comes from the manifest's `name` field, falling back to the folder name when it is missing.",
+                    "Technologies are read from `dependencies` and `devDependencies` **only** — `peerDependencies` and `optionalDependencies` are ignored.",
+                    "Orbit recurses through subfolders, but skips common build and cache folders such as `node_modules`, `.git`, `dist`, `out`, `.next`, `.turbo`, `.expo`, `.vscode`, and `.cursor`.",
+                ],
+            },
+            { type: "heading", text: "Supported project types" },
+            {
+                type: "paragraph",
+                text: "Because detection is driven by `package.json`, Orbit effectively supports **Node.js / JavaScript / TypeScript projects** — web apps, Node services, Electron desktop apps, and React Native or Expo apps — provided they ship a `package.json`. Projects built on other runtimes are not detected at all.",
+            },
+            {
+                type: "table",
+                head: ["Ecosystem", "Detected today?", "Project marker Orbit expects"],
+                rows: [
+                    ["{icon:node} Node.js / JavaScript / TypeScript", "Yes", "`package.json`"],
+                    ["{icon:python} Python", "No", "—"],
+                    ["{icon:rust} Rust", "No", "—"],
+                    ["{icon:go} Go", "No", "—"],
+                    ["{icon:java} Java / Kotlin", "No", "—"],
+                    ["{icon:ruby} Ruby", "No", "—"],
+                    ["{icon:php} PHP", "No", "—"],
+                    ["{icon:dotnet} .NET / C#", "No", "—"],
+                ],
+                caption: "\"Yes\" means Orbit finds the project and reads it. Anything marked \"No\" is invisible to the scanner today.",
+            },
+            {
+                type: "callout",
+                variant: "note",
+                title: "Detection comes from dependencies",
+                text: "Orbit never guesses. A technology appears only when a matching package is present in `dependencies` or `devDependencies`. If a framework is not in the registry below, it will not appear even if you use it every day.",
+            },
+            { type: "heading", text: "Detected technologies" },
+            {
+                type: "paragraph",
+                text: "Orbit ships a fixed registry. These are all the technologies it can currently report, grouped by category:",
+            },
+            {
+                type: "list",
+                items: [
+                    "**Languages** — {icon:typescript} TypeScript. (JavaScript is listed in the registry but has no triggering package, so it does not currently appear.)",
+                    "**Frontend** — {icon:react} React, {icon:next} Next.js, {icon:react-native} React Native, {icon:expo} Expo",
+                    "**Backend** — {icon:node} Node.js, {icon:express} Express, {icon:nestjs} NestJS",
+                    "**Styling** — {icon:tailwindcss} Tailwind CSS",
+                    "**Database / ORM** — {icon:prisma} Prisma, {icon:mongoose} Mongoose, {icon:drizzle} Drizzle",
+                    "**Tools** — {icon:vite} Vite, {icon:tanstack-query} TanStack Query, {icon:tanstack-router} TanStack Router, {icon:socketio} Socket.IO, {icon:electron} Electron, {icon:electron-vite} electron-vite, {icon:turborepo} Turborepo, {icon:bun} Bun, {icon:jest} Jest, {icon:vitest} Vitest, {icon:webpack} Webpack, {icon:esbuild} esbuild",
+                ],
+            },
+            {
+                type: "table",
+                head: ["Technology", "Category", "Triggered by a dependency in `dependencies` / `devDependencies`"],
+                rows: [
+                    ["{icon:javascript} JavaScript", "Languages", "(none — currently never detected)"],
+                    ["{icon:typescript} TypeScript", "Languages", "typescript"],
+                    ["{icon:react} React", "Frontend", "react"],
+                    ["{icon:next} Next.js", "Frontend", "next"],
+                    ["{icon:react-native} React Native", "Frontend", "react-native"],
+                    ["{icon:expo} Expo", "Frontend", "expo"],
+                    ["{icon:node} Node.js", "Backend", "express, fastify, @nestjs/core, hono, koa"],
+                    ["{icon:express} Express", "Backend", "express"],
+                    ["{icon:nestjs} NestJS", "Backend", "@nestjs/core"],
+                    ["{icon:tailwindcss} Tailwind CSS", "Styling", "tailwindcss"],
+                    ["{icon:prisma} Prisma", "Database / ORM", "prisma, @prisma/client"],
+                    ["{icon:mongoose} Mongoose", "Database / ORM", "mongoose"],
+                    ["{icon:drizzle} Drizzle", "Database / ORM", "drizzle-orm"],
+                    ["{icon:vite} Vite", "Tools", "vite"],
+                    ["{icon:tanstack-query} TanStack Query", "Tools", "@tanstack/react-query"],
+                    ["{icon:tanstack-router} TanStack Router", "Tools", "@tanstack/react-router"],
+                    ["{icon:socketio} Socket.IO", "Tools", "socket.io, socket.io-client"],
+                    ["{icon:electron} Electron", "Tools", "electron"],
+                    ["{icon:electron-vite} electron-vite", "Tools", "electron-vite"],
+                    ["{icon:turborepo} Turborepo", "Tools", "turbo"],
+                    ["{icon:bun} Bun", "Tools", "bun-types"],
+                    ["{icon:jest} Jest", "Tools", "jest"],
+                    ["{icon:vitest} Vitest", "Tools", "vitest"],
+                    ["{icon:webpack} Webpack", "Tools", "webpack"],
+                    ["{icon:esbuild} esbuild", "Tools", "esbuild"],
+                ],
+                caption: "The registry lives in `src/main/scanner/data.ts`. Adding an entry there — plus a label and an icon — is all it takes to support a new technology.",
+            },
+            {
+                type: "callout",
+                variant: "note",
+                title: "Node.js is a family, not a framework",
+                text: "The `Node.js` entry triggers on `express`, `fastify`, `@nestjs/core`, `hono`, or `koa`. Express and NestJS also have their own entries, so those projects show both tags — but Fastify, Hono, and Koa currently show only `Node.js`.",
+            },
+            { type: "heading", text: "Workspaces and grouping" },
+            {
+                type: "paragraph",
+                text: "Orbit groups related packages only when it finds a recognized workspace root. The **only** recognized workspace configuration is a `package.json` that declares a `workspaces` field — the npm, Yarn, and Bun convention.",
+            },
+            {
+                type: "list",
+                items: [
+                    "**Recognized:** a `package.json` containing a `workspaces` field.",
+                    "**Not recognized:** `pnpm-workspace.yaml`, `lerna.json`, `rush.json`, Nx, Bazel, Cargo workspaces, and other monorepo tools. These folders are treated as ordinary directories.",
+                    "A workspace root's own `package.json` is never listed as a project — the root is a container only.",
+                    "Grouping is positional: every project nested under the workspace folder is attached to the **closest** (deepest) workspace root that contains it.",
+                    "The declared `workspaces` globs are **not** parsed. Orbit uses filesystem containment, so a project inside the folder is grouped even when the declared patterns would not match it.",
+                ],
+            },
+            {
+                type: "callout",
+                variant: "warning",
+                title: "No recognized workspace means no grouping",
+                text: "If a folder contains several projects but none of them is a `package.json` with a `workspaces` field, Orbit does **not** group them. Each project appears as a separate **standalone** entry in All Projects. Orbit will not infer that they belong together.",
+            },
+            {
+                type: "callout",
+                variant: "note",
+                title: "Where grouped projects appear",
+                text: "Workspace members are listed only in the **Workspaces** view. Standalone projects appear in **All Projects**. A project never appears in both.",
+            },
+            { type: "heading", text: "Other limitations" },
+            {
+                type: "list",
+                items: [
+                    "**No metadata beyond the manifest** — no Git status, branch, scripts, or last-modified time yet. See the [Roadmap](/docs/roadmap).",
+                    "**A malformed or unreadable `package.json` is skipped**, so that project silently does not appear.",
+                    "**`peerDependencies` and `optionalDependencies` are ignored**, so a technology used only there will not be detected.",
+                    "**JavaScript never appears**, because it has no trigger package in the registry.",
+                    "**Folders without a `package.json` are invisible**, even when they clearly contain code.",
+                ],
+            },
+            {
+                type: "callout",
+                variant: "tip",
+                title: "Extending detection",
+                text: "The registry is data-driven and easy to extend. See [Technology detection](/docs/technology-detection) for the mechanics, or the [Roadmap](/docs/roadmap) for what is planned.",
+            },
+        ],
+    },
+    {
+        slug: "opening-projects",
+        title: "Opening projects",
+        description: "How Orbit opens projects and workspaces in external editors, terminals, and file managers, and how it picks the app to use.",
+        group: "Using Orbit",
+        blocks: [
+            {
+                type: "paragraph",
+                text: "Orbit does not try to replace your tools. It hands a project folder to an application you already have, but you decide which one. Configuration lives in **Settings → Applications**, under **Code editor** and **Terminal**.",
+            },
+            { type: "heading", text: "Three ways to choose an application" },
+            {
+                type: "list",
+                items: [
+                    "**Auto (default)** — Orbit probes a fixed list in order and uses the first application it finds installed.",
+                    "**Preset** — pin a known editor or terminal by name. Orbit resolves it at launch time, including **Flatpak** and **Snap** wrappers.",
+                    "**Custom** — enter an exact command line. Orbit splits it into arguments and launches the process directly.",
+                ],
+            },
+            { type: "heading", text: "Open in editor" },
+            {
+                type: "paragraph",
+                text: "Presets include **Visual Studio Code**, **VSCodium**, **Cursor**, **Windsurf**, **Zed**, and **Sublime Text**. In Auto mode, Orbit checks the `VISUAL` and `EDITOR` environment variables first — flags are allowed, for example `code --wait` — then probes `code`, `codium`, `code-insiders`, `cursor`, `windsurf`, `zed`, and `subl`.",
+            },
+            { type: "heading", text: "Open in terminal" },
+            {
+                type: "paragraph",
+                text: "The terminal is opened rooted at the project path. Presets cover the **system default** (`xdg-terminal-exec`), **GNOME Terminal**, **Konsole**, **Kitty**, **Alacritty**, **WezTerm**, **foot**, **Tilix**, **Xfce Terminal**, and `xterm`; Auto mode probes them in that order.",
+            },
+            { type: "heading", text: "Reveal in file manager" },
+            {
+                type: "paragraph",
+                text: "Orbit reveals the project or workspace folder using your operating system's default file manager.",
+            },
+            { type: "heading", text: "Copy path" },
+            {
+                type: "paragraph",
+                text: "Copy the absolute path to the clipboard for pasting anywhere else.",
+            },
+            {
+                type: "callout",
+                variant: "tip",
+                title: "Chosen apps are honoured strictly",
+                text: "When you pin an application and it later moves or is uninstalled, Orbit tells you instead of silently opening a different one. Every action also validates that the path is an absolute, existing directory before doing anything.",
+            },
+            {
+                type: "callout",
+                variant: "note",
+                title: "No shell, ever",
+                text: "Commands — including custom ones — are never run through a shell (`shell: false`), so a saved command can never be interpreted as shell syntax.",
+            },
+        ],
+    },
+    {
+        slug: "keyboard-shortcuts",
+        title: "Keyboard shortcuts",
+        description: "Orbit keyboard shortcuts, including the search hotkey and how to move quickly through the dashboard.",
+        group: "Using Orbit",
+        blocks: [
+            {
+                type: "paragraph",
+                text: "Orbit keeps its shortcut surface small and predictable.",
+            },
+            {
+                type: "table",
+                head: ["Action", "Shortcut"],
+                rows: [["Focus and select the search bar", "Ctrl / Cmd + K"]],
+            },
+            {
+                type: "callout",
+                variant: "note",
+                title: "Search behaviour",
+                text: "The hotkey focuses the search input and selects its contents. Pressing it again while focused re-selects the text so you can start typing immediately.",
+            },
+        ],
+    },
+    {
+        slug: "architecture",
+        title: "Architecture",
+        description: "How Orbit is structured: a secure Electron main process, a narrow preload bridge, and a React renderer driven by one source of truth.",
+        group: "Reference",
+        blocks: [
+            {
+                type: "paragraph",
+                text: "Orbit follows a strict separation between the filesystem and the UI. Filesystem access never leaves the main process, and the renderer talks to it through a single, narrow bridge.",
+            },
+            {
+                type: "code",
+                lang: "text",
+                title: "Data flow",
+                code: [
+                    "main process (Node)              preload                renderer (React)",
+                    "───────────────────────         ───────                ────────────────",
+                    "scanner    ──┐",
+                    "settings   ──┼─► ipcMain.handle ──► contextBridge ──► window.api.invoke(...)",
+                    "launcher   ──┘   (settings.json)    (window.api)          │",
+                    "                                                            ▼",
+                    "                                                  OrbitProvider ──► views",
+                ].join("\n"),
+            },
+            { type: "heading", text: "1. Scan — main process" },
+            {
+                type: "paragraph",
+                text: "`src/main/scanner` walks your projects directory, parses each `package.json`, matches dependencies against the technology registry, and detects workspace roots. Member packages are grouped under their closest workspace; everything else is returned as a standalone project. Filesystem access never leaves the main process.",
+            },
+            { type: "heading", text: "2. Settings & launch — main process" },
+            {
+                type: "paragraph",
+                text: "`src/main/settings` persists a small JSON document (projects directory and launcher preferences) in the app's user-data folder and resolves it on demand. `src/main/launcher` holds the editor and terminal presets and detects which ones are installed; opening a project re-resolves the command at launch time and spawns it with `shell: false`.",
+            },
+            { type: "heading", text: "3. Bridge — preload" },
+            {
+                type: "paragraph",
+                text: "A single, narrow `window.api.invoke(channel, ...args)` method is exposed through `contextBridge` with `contextIsolation` enabled. There is no `nodeIntegration` in the renderer, and unrestricted IPC is never exposed.",
+            },
+            { type: "heading", text: "4. State — renderer" },
+            {
+                type: "paragraph",
+                text: "`OrbitProvider` loads the snapshot once on mount, derives technology statistics and the combined project list (standalone plus workspace members), and drives every view. Rescans keep the last good results on screen if something goes wrong.",
+            },
+            { type: "heading", text: "5. Views" },
+            {
+                type: "paragraph",
+                text: "Overview, All Projects, Workspaces, Technologies, Favorites, and Settings render from that single source of truth.",
+            },
+            { type: "heading", text: "Project structure" },
+            {
+                type: "code",
+                lang: "text",
+                title: "src/",
+                code: [
+                    "├─ main/               # Electron main process",
+                    "│  ├─ scanner/         # Scanning, tech detection, and project actions",
+                    "│  ├─ settings/        # JSON settings store (projects root, launchers)",
+                    "│  ├─ launcher/        # Editor/terminal catalogue and detection",
+                    "│  ├─ ipc/             # Typed IPC handler registration",
+                    "│  └─ window/          # BrowserWindow creation",
+                    "├─ preload/            # contextBridge — exposes the narrow window.api",
+                    "├─ renderer/           # React application",
+                    "│  └─ src/",
+                    "│     ├─ app/          # Entry point and global styles",
+                    "│     ├─ components/   # Views and UI primitives",
+                    "│     ├─ contexts/     # Context definitions",
+                    "│     ├─ providers/    # State providers (Orbit data, toasts)",
+                    "│     ├─ hooks/        # Reusable hooks (search hotkey, favorites, etc.)",
+                    "│     ├─ lib/          # Formatting, technology labels, and icon mappings",
+                    "│     └─ services/     # Renderer-side adapter over the preload bridge",
+                    "└─ shared/             # Types shared across main, preload, and renderer",
+                ].join("\n"),
+            },
+            { type: "heading", text: "Tech stack" },
+            {
+                type: "list",
+                items: [
+                    "**Electron** + **electron-vite** for the desktop shell and builds",
+                    "**React 19** + **TypeScript** for the UI",
+                    "**Tailwind CSS v4** with a custom dark design system",
+                    "**lucide-react** for interface icons",
+                    "**Devicon** + **Simple Icons** for technology logos",
+                ],
+            },
+            {
+                type: "callout",
+                variant: "note",
+                title: "Security boundaries",
+                text: "Electron's main process owns filesystem access, scanning, settings, and process spawning. The renderer communicates only through the narrow preload API and IPC, and no launch ever runs through a shell.",
+            },
+        ],
+    },
+    {
+        slug: "development",
+        title: "Development",
+        description: "Set up Orbit for local development, understand the available scripts, and learn the conventions that keep the codebase small and predictable.",
+        group: "Reference",
+        blocks: [
+            {
+                type: "paragraph",
+                text: "This page covers working on Orbit itself. For installing and using the app, see [Installation](/docs/installation) and the [Quick start](/docs/getting-started).",
+            },
+            { type: "heading", text: "Get the code" },
+            {
+                type: "code",
+                lang: "bash",
+                code: ["git clone https://github.com/dagisolo10/Orbit.git", "cd Orbit", "bun install"].join("\n"),
+            },
+            { type: "heading", text: "Scripts" },
+            {
+                type: "table",
+                head: ["Script", "What it does"],
+                rows: [
+                    ["`dev`", "Run Orbit in development with hot reload"],
+                    ["`typecheck`", "Type-check the main/preload and renderer projects"],
+                    ["`lint`", "Run ESLint with autofix"],
+                    ["`format`", "Format the codebase with Prettier"],
+                    ["`build`", "Type-check, then produce a production build"],
+                    ["`start`", "Preview the production build"],
+                    ["`build:linux` / `build:mac` / `build:win`", "Package a distributable for that platform"],
+                    ["`build:unpack`", "Package an unpacked build (great for testing)"],
+                    ["`build:arch`", "Build a pacman package for Arch Linux"],
+                ],
+            },
+            {
+                type: "callout",
+                variant: "tip",
+                text: "All scripts work with either `bun run <script>` or `npm run <script>`.",
+            },
+            { type: "heading", text: "Conventions" },
+            {
+                type: "list",
+                items: [
+                    "The Electron main process owns filesystem access and scanning.",
+                    "The renderer communicates through the narrow preload API and IPC.",
+                    "Keep existing security boundaries; never expose unrestricted IPC.",
+                    "Avoid unnecessary dependencies and premature abstractions.",
+                    "The technology registry is data-driven — expand detection incrementally.",
+                    "Verify features in the running application before marking them done.",
+                ],
+            },
+            { type: "heading", text: "Contributing" },
+            {
+                type: "paragraph",
+                text: "Fork the repository on GitHub, make your change on a branch, and open a pull request. Before submitting, run the checks the project uses:",
+            },
+            {
+                type: "code",
+                lang: "bash",
+                code: ["bun run typecheck", "bun run lint", "bun run build"].join("\n"),
+            },
+            {
+                type: "paragraph",
+                text: "Bug reports and feature requests are welcome on the [issue tracker](https://github.com/dagisolo10/Orbit/issues).",
+            },
+        ],
+    },
+    {
+        slug: "roadmap",
+        title: "Roadmap",
+        description: "What is planned for Orbit: richer project detail, Git integration, process management, templates, and more.",
+        group: "Reference",
+        blocks: [
+            {
+                type: "paragraph",
+                text: "Orbit is under active development. This page tracks where it is going. Priorities can shift, and the [feature tracker](https://github.com/dagisolo10/Orbit) is the source of truth.",
+            },
+            { type: "heading", text: "Recently shipped" },
+            {
+                type: "list",
+                items: [
+                    "**Configurable projects directory** — pick the folder Orbit scans from Settings, with your choice persisted across restarts.",
+                    "**Settings page** — General (projects directory, re-scan, dark-only theme), Applications (editor and terminal), and About sections.",
+                    "**Editor & terminal preferences** — auto-detect, pin a known application, or enter a custom command, with Flatpak and Snap wrapper detection.",
+                ],
+            },
+            { type: "heading", text: "Near term" },
+            {
+                type: "list",
+                items: [
+                    "**Richer project detail** — scripts, package manager, dependency lists, and last-modified time.",
+                    "**More detected technologies** — the registry is data-driven and easy to extend.",
+                    "**Packaging polish** — app icons and installers for distribution.",
+                ],
+            },
+            { type: "heading", text: "Git integration" },
+            {
+                type: "paragraph",
+                text: "The goal is to make Orbit a useful Git workspace without running every command by hand.",
+            },
+            {
+                type: "list",
+                items: [
+                    "Detect whether a project is a Git repository and show the current branch.",
+                    "Show working-tree status, ahead/behind counts, and the latest commit summary.",
+                    "View commit history, inspect diffs, and stage, unstage, and commit changes.",
+                    "List, create, and switch branches, handling unsafe operations gracefully.",
+                ],
+            },
+            { type: "heading", text: "Dependencies & scripts" },
+            {
+                type: "list",
+                items: [
+                    "Display dependencies, devDependencies, and package scripts.",
+                    "Identify the package manager and run scripts from Orbit.",
+                    "Provide a convenient way to install dependencies and detect common setup problems.",
+                ],
+            },
+            { type: "heading", text: "Development workflow" },
+            {
+                type: "list",
+                items: [
+                    "Show running development processes and their ports.",
+                    "Restart a backend or dev server; stop selected or all managed processes.",
+                    "View process output and logs, and expose frequent actions on the project card.",
+                ],
+            },
+            { type: "heading", text: "Templates & scaffolding" },
+            {
+                type: "list",
+                items: [
+                    "Create reusable project architecture templates.",
+                    "Save an existing project's structure as a template.",
+                    "Scaffold new projects from saved templates with configurable names and options.",
+                ],
+            },
+            { type: "heading", text: "Later improvements" },
+            {
+                type: "list",
+                items: [
+                    "Improve monorepo and workspace visualization.",
+                    "Add project grouping and organization.",
+                    "Add richer project metadata and customizable settings.",
+                    "Expand language support beyond JavaScript and TypeScript.",
+                ],
+            },
+        ],
+    },
+    {
+        slug: "faq",
+        title: "Frequently asked questions",
+        description: "Answers to common questions about Orbit — privacy, supported platforms, data sources, and whether it works offline.",
+        group: "Reference",
+        blocks: [
+            { type: "heading", text: "Does Orbit send my data anywhere?" },
+            {
+                type: "paragraph",
+                text: "No. Orbit runs entirely on your machine and requires no network access at runtime. It never uploads your code, paths, or project names.",
+            },
+            { type: "heading", text: "Which platforms are supported?" },
+            {
+                type: "paragraph",
+                text: "Linux today. Orbit is built with Electron and the repository includes macOS and Windows packaging targets, but only Linux packages are published so far.",
+            },
+            { type: "heading", text: "Which projects does Orbit detect?" },
+            {
+                type: "paragraph",
+                text: "Only projects that contain a `package.json` — JavaScript and TypeScript projects. Support for other ecosystems is planned but not implemented. See [Supported projects & limitations](/docs/supported-projects) for the complete list and [Technology detection](/docs/technology-detection) for the registry.",
+            },
+            { type: "heading", text: "Where does Orbit look for projects?" },
+            {
+                type: "paragraph",
+                text: "By default it scans `<your home directory>/Projects`. You can point it anywhere from **Settings → General → Projects directory → Change folder**; your choice is saved and reused on every launch.",
+            },
+            { type: "heading", text: "Can I choose which editor and terminal Orbit opens?" },
+            {
+                type: "paragraph",
+                text: "Yes. Open **Settings → Applications** to pick a code editor and terminal. Leave them on **Auto** to let Orbit detect one, choose a known preset, or enter a custom command. See [Opening projects](/docs/opening-projects).",
+            },
+            { type: "heading", text: "Does Orbit modify my projects?" },
+            {
+                type: "paragraph",
+                text: "No. Orbit is read-only with respect to your files. It parses manifests and opens folders in external tools; it never edits project files.",
+            },
+            { type: "heading", text: "Does it work offline?" },
+            {
+                type: "paragraph",
+                text: "Yes, fully. Even the technology logos are bundled locally, so the interface renders completely without a connection.",
+            },
+            { type: "heading", text: "How is Orbit licensed?" },
+            {
+                type: "paragraph",
+                text: "Orbit is released under the MIT license. See the [repository](https://github.com/dagisolo10/Orbit) for details.",
+            },
+            { type: "heading", text: "How do I report a bug or request a feature?" },
+            {
+                type: "paragraph",
+                text: "Open an issue on the [GitHub issue tracker](https://github.com/dagisolo10/Orbit/issues).",
+            },
+        ],
+    },
+    {
+        slug: "troubleshooting",
+        title: "Troubleshooting",
+        description: "Fix common Orbit problems: empty results, missing directories, and editors or terminals that will not open.",
+        group: "Reference",
+        blocks: [
+            { type: "heading", text: "The dashboard is empty" },
+            {
+                type: "list",
+                items: [
+                    "Confirm the projects directory in **Settings → General** — it defaults to **`<your home directory>/Projects`** but may have been changed to a custom folder.",
+                    "Make sure each project contains a `package.json`; folders without one are ignored.",
+                    "Check the directory card in the sidebar. A green dot means the directory was read successfully; amber means it was not.",
+                    "Hit **Re-scan** in Settings after adding or moving projects.",
+                ],
+            },
+            { type: "heading", text: "A project is missing from All Projects" },
+            {
+                type: "paragraph",
+                text: "It may belong to a workspace. Workspace members appear in the **Workspaces** view rather than All Projects. See [Workspaces](/docs/workspaces).",
+            },
+            { type: "heading", text: "No editor or terminal opens" },
+            {
+                type: "list",
+                items: [
+                    "Open **Settings → Applications** and check the **Code editor** and **Terminal** preferences.",
+                    "On **Auto**, Orbit probes a fixed list. Install one of those applications, or pick a **preset**, or switch to **Custom** and enter the exact command.",
+                    "A pinned application that later moved or was uninstalled is reported rather than replaced — choose another one in Settings.",
+                    'Editor commands may include flags, for example a custom command of `code --wait`.',
+                ],
+            },
+            { type: "heading", text: "A scan failed" },
+            {
+                type: "paragraph",
+                text: "Orbit keeps the last good results on screen when a rescan fails, and safely skips unreadable folders and malformed manifests. Check the directory permissions, then rescan.",
+            },
+            { type: "heading", text: "Still stuck?" },
+            {
+                type: "paragraph",
+                text: "Search or open an issue on the [GitHub issue tracker](https://github.com/dagisolo10/Orbit/issues) with your platform and the steps to reproduce.",
+            },
+        ],
+    },
+];
+
+export const docsBySlug = new Map(docsPages.map((page) => [page.slug, page]));
