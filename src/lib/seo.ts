@@ -13,6 +13,7 @@ type PageMetadataInput = {
 export function createMetadata({ title, description = siteConfig.description, path = "/", keywords = [], type = "website", noIndex = false }: PageMetadataInput = {}): Metadata {
     const url = absoluteUrl(path);
     const fullTitle = title ? `${title} — ${siteConfig.name}` : siteConfig.title;
+    const ogImage = { url: absoluteUrl("/hero.png"), width: 1920, height: 1080, alt: siteConfig.tagline };
 
     return {
         title,
@@ -28,12 +29,14 @@ export function createMetadata({ title, description = siteConfig.description, pa
             description,
             siteName: siteConfig.name,
             locale: siteConfig.locale,
+            images: [ogImage],
         },
         twitter: {
             card: "summary_large_image",
             title: fullTitle,
             description,
             creator: "@dagisolo10",
+            images: [ogImage.url],
         },
         robots: noIndex
             ? { index: false, follow: false }
