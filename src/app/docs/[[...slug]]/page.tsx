@@ -60,7 +60,7 @@ async function DocsArticle({ params }: { params: Promise<Params> }) {
     ];
 
     return (
-        <article className="min-w-0">
+        <article className="anim-reveal min-w-0">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
             <header className="border-border/70 border-b pb-6">
@@ -72,7 +72,7 @@ async function DocsArticle({ params }: { params: Promise<Params> }) {
                 <p className="text-muted-foreground mt-3 max-w-2xl text-[15px] leading-7">{page.description}</p>
             </header>
 
-            <div className="mt-8">
+            <div className="anim-reveal mt-8">
                 <DocBlocks blocks={page.blocks} />
             </div>
 

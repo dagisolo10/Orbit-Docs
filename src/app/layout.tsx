@@ -1,6 +1,7 @@
 import "@/app/globals.css";
 
 import { SiteFooter } from "@/components/site/site-footer";
+import { AppAnimations } from "@/components/app-animations";
 import { SiteHeader } from "@/components/site/site-header";
 import { createMetadata, softwareApplicationJsonLd, websiteJsonLd } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
@@ -44,17 +45,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="en" className={cn("dark h-full scroll-pt-24", "antialiased", inter.variable, geistMono.variable)}>
             <body className="bg-background text-foreground flex min-h-full flex-col">
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html:
+                            "!function(){var d=document.documentElement;d.classList.add('js-anim');window.addEventListener('load',function(){setTimeout(function(){if(d.dataset.anim!=='ready')d.classList.remove('js-anim')},3000)})}();",
+                    }}
+                />
                 <a
                     href="#main"
                     className="focus:bg-primary focus:text-primary-foreground sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-100 focus:rounded-md focus:px-3 focus:py-2 focus:text-sm focus:font-medium"
                 >
                     Skip to content
                 </a>
-                <SiteHeader />
-                <div id="main" className="flex flex-1 flex-col">
-                    {children}
-                </div>
-                <SiteFooter />
+                <AppAnimations>
+                    <SiteHeader />
+                    <div id="main" className="flex flex-1 flex-col">
+                        {children}
+                    </div>
+                    <SiteFooter />
+                </AppAnimations>
                 <Script
                     id="orbit-structured-data"
                     type="application/ld+json"
