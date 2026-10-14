@@ -2,6 +2,8 @@
 
 The official documentation and release site for [Orbit](https://github.com/dagisolo10/Orbit) — the local, offline project workspace for developers.
 
+Live site: [orbit.dagidev.com](https://orbit.dagidev.com)
+
 Built with **Next.js 16** (App Router, Cache Components, React Compiler), **React 19**, **Tailwind CSS v4**, and **GSAP** for motion. Technology logos come from **Devicon** and **Simple Icons**, bundled locally.
 
 ## What's here
