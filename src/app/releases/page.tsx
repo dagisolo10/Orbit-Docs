@@ -1,4 +1,4 @@
-import { LatestReleaseCard, ReleaseTimeline } from "@/components/releases/release-notes";
+import { LatestReleaseCard, ReleaseList } from "@/components/releases/release-notes";
 import { latestRelease, releases } from "@/content/releases";
 import { breadcrumbJsonLd, createMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
@@ -9,7 +9,8 @@ import { FaGithub } from "react-icons/fa6";
 
 export const metadata: Metadata = createMetadata({
     title: "Releases & downloads",
-    description: "Download Orbit for Linux — portable AppImage, Debian/Ubuntu .deb, and Arch pacman packages — and read the full changelog. Every release is published here and mirrored to GitHub Releases.",
+    description:
+        "Download Orbit for Linux — portable AppImage, Debian/Ubuntu .deb, and Arch pacman packages — and read the full changelog. Every release is published here and mirrored to GitHub Releases.",
     path: "/releases",
     keywords: ["Orbit download", "Orbit release notes", "Orbit changelog", "Orbit for Linux", "Orbit AppImage", "Orbit deb", "Orbit pacman"],
 });
@@ -55,7 +56,7 @@ export default function ReleasesPage() {
                 <TriangleAlert className="mt-0.5 size-4 shrink-0 text-amber-400" />
                 <p className="text-muted-foreground text-sm">
                     <span className="text-foreground font-medium">Before you download:</span> Orbit detects JavaScript and TypeScript projects by their{" "}
-                    <code className="rounded bg-muted px-1 py-0.5 font-mono text-[12px]">package.json</code> only. See{" "}
+                    <code className="bg-muted rounded px-1 py-0.5 font-mono text-[12px]">package.json</code> only. See{" "}
                     <Link href="/docs/supported-projects" className="text-foreground decoration-primary/50 hover:decoration-primary font-medium underline underline-offset-4">
                         supported projects &amp; limitations
                     </Link>{" "}
@@ -77,7 +78,7 @@ export default function ReleasesPage() {
 
             <div className="mt-10 space-y-10">
                 <LatestReleaseCard release={latestRelease} />
-                <ReleaseTimeline releases={releases} />
+                <ReleaseList releases={releases} />
             </div>
 
             <div className="border-border/70 bg-card/30 mt-10 flex flex-col items-start gap-3 rounded-2xl border p-5 sm:flex-row sm:items-center sm:justify-between">

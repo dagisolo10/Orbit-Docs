@@ -107,17 +107,17 @@ export const docsPages: DocPage[] = [
             {
                 type: "steps",
                 items: [
-                    { title: "Download the AppImage", description: "Grab `Orbit-1.0.0.AppImage` from the [releases page](/releases)." },
+                    { title: "Download the AppImage", description: "Grab `Orbit-1.1.0.AppImage` from the [releases page](/releases)." },
                     { title: "Open a terminal in the download folder", description: "For example, `cd ~/Downloads`." },
-                    { title: "Make it executable", description: "Run `chmod +x Orbit-1.0.0.AppImage`." },
-                    { title: "Run Orbit", description: "Run `./Orbit-1.0.0.AppImage`." },
+                    { title: "Make it executable", description: "Run `chmod +x Orbit-1.1.0.AppImage`." },
+                    { title: "Run Orbit", description: "Run `./Orbit-1.1.0.AppImage`." },
                 ],
             },
             {
                 type: "code",
                 lang: "bash",
                 title: "AppImage",
-                code: ["chmod +x Orbit-1.0.0.AppImage", "./Orbit-1.0.0.AppImage"].join("\n"),
+                code: ["chmod +x Orbit-1.1.0.AppImage", "./Orbit-1.1.0.AppImage"].join("\n"),
             },
             {
                 type: "callout",
@@ -134,11 +134,11 @@ export const docsPages: DocPage[] = [
                 type: "code",
                 lang: "bash",
                 title: "Debian / Ubuntu",
-                code: ["sudo apt install ./Orbit-1.0.0.deb"].join("\n"),
+                code: ["sudo apt install ./Orbit-1.1.0.deb"].join("\n"),
             },
             {
                 type: "paragraph",
-                text: "If your system cannot install local files directly, use `sudo dpkg -i Orbit-1.0.0.deb`, then run `sudo apt-get install -f` to fix any missing dependencies.",
+                text: "If your system cannot install local files directly, use `sudo dpkg -i Orbit-1.1.0.deb`, then run `sudo apt-get install -f` to fix any missing dependencies.",
             },
             { type: "heading", text: "Arch Linux (pacman)" },
             {
@@ -149,7 +149,7 @@ export const docsPages: DocPage[] = [
                 type: "code",
                 lang: "bash",
                 title: "Arch Linux",
-                code: ["sudo pacman -U Orbit-1.0.0.pacman"].join("\n"),
+                code: ["sudo pacman -U Orbit-1.1.0.pacman"].join("\n"),
             },
             {
                 type: "callout",
@@ -208,7 +208,7 @@ export const docsPages: DocPage[] = [
                 type: "callout",
                 variant: "note",
                 title: "Filenames follow the version",
-                text: "Artifacts are named with the product name and version, for example `Orbit-1.0.0.AppImage`. Replace the version with the release you downloaded.",
+                text: "Artifacts are named with the product name and version, for example `Orbit-1.1.0.AppImage`. Replace the version with the release you downloaded.",
             },
         ],
     },
@@ -259,6 +259,7 @@ export const docsPages: DocPage[] = [
                     ["All Projects", "Standalone projects only, with search, sorting, technology and category filters, and pagination."],
                     ["Workspaces", "Expandable monorepo groups with expand/collapse-all and the same filters and layouts."],
                     ["Technologies", "Your stack, grouped by category, with a jump to every project that uses a given technology."],
+                    ["Servers", "Register your development commands and start, stop, or restart them, with live output and detected URLs."],
                     ["Favorites", "Projects you starred for quick access, including projects inside workspaces."],
                     ["Settings", "Choose the projects directory to scan and rescan, pick the editor and terminal Orbit opens, and see version and links."],
                 ],
@@ -302,7 +303,7 @@ export const docsPages: DocPage[] = [
         blocks: [
             {
                 type: "paragraph",
-                text: "Orbit is organised into six views, all driven by a single scan of your projects directory.",
+                text: "Orbit is organised into seven views, all driven by a single scan of your projects directory.",
             },
             { type: "heading", text: "Overview dashboard" },
             {
@@ -347,6 +348,11 @@ export const docsPages: DocPage[] = [
                 type: "list",
                 items: ["Open in editor", "Open in terminal", "Reveal in file manager", "Copy path"],
             },
+            { type: "heading", text: "Development servers" },
+            {
+                type: "paragraph",
+                text: "The Servers view keeps your long-running commands — dev servers, watchers, backends — in one place. Register a command, then start, stop, and restart it from Orbit while its output streams into a built-in terminal. Detected localhost URLs are one click away. See [Development server manager](/docs/development-servers).",
+            },
             { type: "heading", text: "Settings" },
             {
                 type: "paragraph",
@@ -356,14 +362,8 @@ export const docsPages: DocPage[] = [
                 type: "table",
                 head: ["Section", "What you can do"],
                 rows: [
-                    [
-                        "General",
-                        "Choose the projects directory (marked **Default**, **Custom**, or **Unavailable**), re-scan on demand, and see the dark-only theme note.",
-                    ],
-                    [
-                        "Applications",
-                        "Pick the code editor and terminal Orbit launches — auto-detected, a known preset, or a custom command — plus the system file manager.",
-                    ],
+                    ["General", "Choose the projects directory (marked **Default**, **Custom**, or **Unavailable**), re-scan on demand, and see the dark-only theme note."],
+                    ["Applications", "Pick the code editor and terminal Orbit launches — auto-detected, a known preset, or a custom command — plus the system file manager."],
                     ["About", "Read the app version and open the documentation or source repository."],
                 ],
             },
@@ -558,7 +558,7 @@ export const docsPages: DocPage[] = [
                     ["{icon:php} PHP", "No", "—"],
                     ["{icon:dotnet} .NET / C#", "No", "—"],
                 ],
-                caption: "\"Yes\" means Orbit finds the project and reads it. Anything marked \"No\" is invisible to the scanner today.",
+                caption: '"Yes" means Orbit finds the project and reads it. Anything marked "No" is invisible to the scanner today.',
             },
             {
                 type: "callout",
@@ -720,6 +720,95 @@ export const docsPages: DocPage[] = [
         ],
     },
     {
+        slug: "development-servers",
+        title: "Development server manager",
+        description: "Run, stop, and restart your development servers from Orbit, watch their live output in a built-in terminal, and open the localhost URLs they print.",
+        group: "Using Orbit",
+        blocks: [
+            {
+                type: "paragraph",
+                text: "Orbit can keep the long-running commands you use every day — dev servers, watchers, backends — in one place. The **Servers** view starts, stops, and restarts them for you, streams their output into a built-in terminal, and detects the localhost URLs they print so you can open them with one click.",
+            },
+            {
+                type: "callout",
+                variant: "note",
+                title: "Nothing starts on its own",
+                text: "Orbit never launches a server by itself. Every configured server stays stopped until you press **Start**, and your configurations are restored on the next launch.",
+            },
+            { type: "heading", text: "Adding a server" },
+            {
+                type: "paragraph",
+                text: "Open the **Servers** view and add a project. You can pick one of the projects Orbit already scanned — search by name, path, or technology — or browse to any folder. Then give it a display name and the command to run.",
+            },
+            {
+                type: "steps",
+                items: [
+                    { title: "Choose a project", description: "Select one of your scanned projects, or use **Browse** to pick any directory on disk." },
+                    { title: "Name it", description: "Give the server a friendly name. It defaults to the selected project's name and can be edited." },
+                    { title: "Enter the command", description: "Type the command line to run, for example `npm run dev`, `bun dev`, or `pnpm start`." },
+                ],
+            },
+            {
+                type: "paragraph",
+                text: "The command is stored exactly as you enter it and is tokenized in the main process — it is never run through a shell. Configurations persist in a small `servers.json` file under the app's user-data directory and are restored the next time you open Orbit.",
+            },
+            { type: "heading", text: "Controlling a server" },
+            {
+                type: "table",
+                head: ["Action", "What it does"],
+                rows: [
+                    ["Start", "Spawns the command in its project directory and begins streaming output."],
+                    ["Stop", "Stops the process and its whole process tree."],
+                    ["Restart", "Stops the server if it is running, then starts it again."],
+                    ["Open URL", "Opens a detected localhost URL in your default browser."],
+                    ["Clear", "Empties the terminal buffer for that server."],
+                ],
+            },
+            { type: "heading", text: "Statuses" },
+            {
+                type: "paragraph",
+                text: "Each server shows its live state, its process id while running, and — when it stops — the exit code or signal.",
+            },
+            {
+                type: "table",
+                head: ["Status", "Meaning"],
+                rows: [
+                    ["starting", "The process has been spawned and is coming up."],
+                    ["running", "The process is live. Detected URLs and the start time are shown."],
+                    ["stopping", "Orbit is shutting the process tree down."],
+                    ["stopped", "The process is not running. This is the initial state."],
+                    ["failed", "The server could not start, or exited unexpectedly. The error is shown."],
+                ],
+            },
+            { type: "heading", text: "Live output" },
+            {
+                type: "list",
+                items: [
+                    "Output streams into a built-in terminal as it is produced, with `stdout`, `stderr`, and system messages distinguished.",
+                    "The buffer is bounded per server, so a chatty process never grows memory without limit.",
+                    "Any **localhost URL** printed by the server is detected and listed as a clickable button that opens in your browser.",
+                    "Use **Clear** to start from a clean view when the output gets noisy.",
+                ],
+            },
+            { type: "heading", text: "Process handling and safety" },
+            {
+                type: "list",
+                items: [
+                    "**Whole process tree** — stopping a server terminates its child processes too, so a dev server does not leave orphans behind.",
+                    "**No shell** — commands are tokenized and spawned with `shell: false`, so a saved command can never be interpreted as shell syntax.",
+                    "**No auto-start** — servers stay stopped until you start them, and unexpected exits are reported with their code rather than failing silently.",
+                    "**Persisted configuration** — servers are saved between sessions; runtime state and logs are not.",
+                ],
+            },
+            {
+                type: "callout",
+                variant: "tip",
+                title: "Related",
+                text: "Each server card also offers the standard project actions — open in editor, copy path, edit, and remove. See [Opening projects](/docs/opening-projects) for how editors and terminals are chosen.",
+            },
+        ],
+    },
+    {
         slug: "keyboard-shortcuts",
         title: "Keyboard shortcuts",
         description: "Orbit keyboard shortcuts, including the search hotkey and how to move quickly through the dashboard.",
@@ -761,9 +850,11 @@ export const docsPages: DocPage[] = [
                     "───────────────────────         ───────                ────────────────",
                     "scanner    ──┐",
                     "settings   ──┼─► ipcMain.handle ──► contextBridge ──► window.api.invoke(...)",
-                    "launcher   ──┘   (settings.json)    (window.api)          │",
-                    "                                                            ▼",
+                    "launcher   ──┤   (projects:scan,    (window.api)          │",
+                    "server mgr ──┘    servers:*, ...)                         ▼",
                     "                                                  OrbitProvider ──► views",
+                    "                                                          ▲",
+                    "                                                   servers:event",
                 ].join("\n"),
             },
             { type: "heading", text: "1. Scan — main process" },
@@ -776,20 +867,25 @@ export const docsPages: DocPage[] = [
                 type: "paragraph",
                 text: "`src/main/settings` persists a small JSON document (projects directory and launcher preferences) in the app's user-data folder and resolves it on demand. `src/main/launcher` holds the editor and terminal presets and detects which ones are installed; opening a project re-resolves the command at launch time and spawns it with `shell: false`.",
             },
-            { type: "heading", text: "3. Bridge — preload" },
+            { type: "heading", text: "3. Servers — main process" },
             {
                 type: "paragraph",
-                text: "A single, narrow `window.api.invoke(channel, ...args)` method is exposed through `contextBridge` with `contextIsolation` enabled. There is no `nodeIntegration` in the renderer, and unrestricted IPC is never exposed.",
+                text: "`src/main/server` owns the development-server lifecycle: it persists configurations in `servers.json`, spawns each command (tokenized, `shell: false`), detects localhost URLs in the output, streams state and log lines to the renderer over a single `servers:event` channel, and tears down the whole process tree on stop. Process handles never cross the IPC boundary.",
             },
-            { type: "heading", text: "4. State — renderer" },
+            { type: "heading", text: "4. Bridge — preload" },
+            {
+                type: "paragraph",
+                text: "A single, narrow `window.api.invoke(channel, ...args)` method is exposed through `contextBridge` with `contextIsolation` enabled, plus one subscription for pushed server events. There is no `nodeIntegration` in the renderer, and unrestricted IPC is never exposed.",
+            },
+            { type: "heading", text: "5. State — renderer" },
             {
                 type: "paragraph",
                 text: "`OrbitProvider` loads the snapshot once on mount, derives technology statistics and the combined project list (standalone plus workspace members), and drives every view. Rescans keep the last good results on screen if something goes wrong.",
             },
-            { type: "heading", text: "5. Views" },
+            { type: "heading", text: "6. Views" },
             {
                 type: "paragraph",
-                text: "Overview, All Projects, Workspaces, Technologies, Favorites, and Settings render from that single source of truth.",
+                text: "Overview, All Projects, Workspaces, Technologies, Servers, Favorites, and Settings render from that single source of truth.",
             },
             { type: "heading", text: "Project structure" },
             {
@@ -801,6 +897,7 @@ export const docsPages: DocPage[] = [
                     "│  ├─ scanner/         # Scanning, tech detection, and project actions",
                     "│  ├─ settings/        # JSON settings store (projects root, launchers)",
                     "│  ├─ launcher/        # Editor/terminal catalogue and detection",
+                    "│  ├─ server/          # Development-server lifecycle, persistence, and logs",
                     "│  ├─ ipc/             # Typed IPC handler registration",
                     "│  └─ window/          # BrowserWindow creation",
                     "├─ preload/            # contextBridge — exposes the narrow window.api",
@@ -914,6 +1011,7 @@ export const docsPages: DocPage[] = [
             {
                 type: "list",
                 items: [
+                    "**Development server manager** — register your dev commands and start, stop, and restart them, with live output and automatic localhost URL detection.",
                     "**Configurable projects directory** — pick the folder Orbit scans from Settings, with your choice persisted across restarts.",
                     "**Settings page** — General (projects directory, re-scan, dark-only theme), Applications (editor and terminal), and About sections.",
                     "**Editor & terminal preferences** — auto-detect, pin a known application, or enter a custom command, with Flatpak and Snap wrapper detection.",
@@ -955,9 +1053,9 @@ export const docsPages: DocPage[] = [
             {
                 type: "list",
                 items: [
-                    "Show running development processes and their ports.",
-                    "Restart a backend or dev server; stop selected or all managed processes.",
-                    "View process output and logs, and expose frequent actions on the project card.",
+                    "Surface running servers and their ports on the Overview dashboard.",
+                    "Manage several servers at once — stop or restart a group in one action.",
+                    "Reusable run presets with per-server environment variables.",
                 ],
             },
             { type: "heading", text: "Templates & scaffolding" },
@@ -1062,7 +1160,7 @@ export const docsPages: DocPage[] = [
                     "Open **Settings → Applications** and check the **Code editor** and **Terminal** preferences.",
                     "On **Auto**, Orbit probes a fixed list. Install one of those applications, or pick a **preset**, or switch to **Custom** and enter the exact command.",
                     "A pinned application that later moved or was uninstalled is reported rather than replaced — choose another one in Settings.",
-                    'Editor commands may include flags, for example a custom command of `code --wait`.',
+                    "Editor commands may include flags, for example a custom command of `code --wait`.",
                 ],
             },
             { type: "heading", text: "A scan failed" },

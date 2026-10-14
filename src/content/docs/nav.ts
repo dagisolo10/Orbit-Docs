@@ -17,6 +17,7 @@ export const docsNav: DocNavGroup[] = [
             { slug: "workspaces", title: "Workspaces" },
             { slug: "technology-detection", title: "Technology detection" },
             { slug: "opening-projects", title: "Opening projects" },
+            { slug: "development-servers", title: "Development servers" },
             { slug: "keyboard-shortcuts", title: "Keyboard shortcuts" },
         ],
     },

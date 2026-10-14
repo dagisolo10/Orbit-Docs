@@ -17,8 +17,8 @@ export const siteConfig = {
         releasesUrl: "https://github.com/dagisolo10/Orbit/releases",
         issuesUrl: "https://github.com/dagisolo10/Orbit/issues",
     },
-    version: "1.0.0",
-    releaseDate: "2026-10-13",
+    version: "1.1.0",
+    releaseDate: "2026-10-14",
     copyrightYear: 2026,
     keywords: [
         "Orbit",

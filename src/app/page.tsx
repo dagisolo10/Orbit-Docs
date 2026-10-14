@@ -1,7 +1,26 @@
 import { CodeBlock } from "@/components/code-block";
 import { TechIcon } from "@/components/tech-icon";
 import { siteConfig } from "@/lib/site";
-import { ArrowRight, Boxes, Code, Cpu, Download, FolderSearch, Layers, Lock, Moon, RefreshCw, Search, ShieldCheck, Sparkles, Star, Terminal, TriangleAlert, type LucideIcon } from "lucide-react";
+import {
+    ArrowRight,
+    Boxes,
+    Code,
+    Cpu,
+    Download,
+    FolderSearch,
+    Layers,
+    Lock,
+    Moon,
+    RefreshCw,
+    Search,
+    Server,
+    ShieldCheck,
+    Sparkles,
+    Star,
+    Terminal,
+    TriangleAlert,
+    type LucideIcon,
+} from "lucide-react";
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa6";
 
@@ -17,6 +36,11 @@ const FEATURES: { icon: LucideIcon; title: string; description: string }[] = [
     { icon: Search, title: "Instant search & filters", description: "Grid or list views with instant search, sorting, technology and category filters, and pagination." },
     { icon: Star, title: "Favorites", description: "Star the projects you use most for quick access, including projects that live inside a workspace." },
     { icon: Terminal, title: "Quick actions", description: "Open any project or workspace root in your editor or terminal, reveal it in the file manager, or copy its path." },
+    {
+        icon: Server,
+        title: "Development server manager",
+        description: "Register your dev commands and start, stop, or restart them from Orbit, with live terminal output and detected localhost URLs.",
+    },
     {
         icon: Code,
         title: "Your tools, your choice",
@@ -79,45 +103,44 @@ export default function HomePage() {
             <section className="aurora relative overflow-hidden">
                 <div className="grid-lines pointer-events-none absolute inset-0" aria-hidden />
                 <div className="relative mx-auto w-full max-w-7xl px-4 pt-16 pb-20 sm:px-6 lg:px-8 lg:pt-24 lg:pb-28">
-                    
-                        <div className="mx-auto max-w-3xl text-center">
-                            <span className="border-border/70 bg-card/50 text-muted-foreground inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium">
-                                <span className="size-1.5 rounded-full bg-emerald-400" />v{siteConfig.version} is out now
-                            </span>
-                            <h1 className="text-foreground mt-6 text-4xl font-semibold tracking-tight text-balance sm:text-6xl">Every project on your disk, finally in one place</h1>
-                            <p className="text-muted-foreground mx-auto mt-5 max-w-2xl text-lg leading-8 text-pretty">
-                                Orbit scans a folder on your machine, detects the technologies in every project, and turns them into a fast, searchable, offline dashboard. No accounts. No cloud. No
-                                telemetry.
-                            </p>
-                            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-                                <Link
-                                    href="/releases"
-                                    className="bg-primary text-primary-foreground hover:bg-primary/85 inline-flex h-11 w-full items-center justify-center gap-2 rounded-lg px-5 text-sm font-medium transition-colors sm:w-auto"
-                                >
-                                    <Download className="size-4" />
-                                    Download Orbit
-                                </Link>
-                                <Link
-                                    href="/docs"
-                                    className="border-border bg-card/40 text-foreground hover:bg-muted/60 inline-flex h-11 w-full items-center justify-center gap-2 rounded-lg border px-5 text-sm font-medium transition-colors sm:w-auto"
-                                >
-                                    Read the docs
-                                    <ArrowRight className="size-4" />
-                                </Link>
-                            </div>
-                            <p className="text-muted-foreground mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs">
-                                <span className="inline-flex items-center gap-1.5">
-                                    <ShieldCheck className="size-3.5 text-emerald-400" /> Private &amp; offline
-                                </span>
-                                <span className="inline-flex items-center gap-1.5">
-                                    <Lock className="size-3.5 text-emerald-400" /> Your code never leaves your machine
-                                </span>
-                                <span className="inline-flex items-center gap-1.5">
-                                    <FaGithub className="size-3.5" /> Open source · MIT
-                                </span>
-                            </p>
+                    <div className="mx-auto max-w-3xl text-center">
+                        <span className="border-border/70 bg-card/50 text-muted-foreground inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium">
+                            <span className="size-1.5 rounded-full bg-emerald-400" />v{siteConfig.version} is out now
+                        </span>
+                        <h1 className="text-foreground mt-6 text-4xl font-semibold tracking-tight text-balance sm:text-6xl">Every project on your disk, finally in one place</h1>
+                        <p className="text-muted-foreground mx-auto mt-5 max-w-2xl text-lg leading-8 text-pretty">
+                            Orbit scans a folder on your machine, detects the technologies in every project, and turns them into a fast, searchable, offline dashboard. No accounts. No cloud. No
+                            telemetry.
+                        </p>
+                        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                            <Link
+                                href="/releases"
+                                className="bg-primary text-primary-foreground hover:bg-primary/85 inline-flex h-11 w-full items-center justify-center gap-2 rounded-lg px-5 text-sm font-medium transition-colors sm:w-auto"
+                            >
+                                <Download className="size-4" />
+                                Download Orbit
+                            </Link>
+                            <Link
+                                href="/docs"
+                                className="border-border bg-card/40 text-foreground hover:bg-muted/60 inline-flex h-11 w-full items-center justify-center gap-2 rounded-lg border px-5 text-sm font-medium transition-colors sm:w-auto"
+                            >
+                                Read the docs
+                                <ArrowRight className="size-4" />
+                            </Link>
                         </div>
-                    
+                        <p className="text-muted-foreground mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs">
+                            <span className="inline-flex items-center gap-1.5">
+                                <ShieldCheck className="size-3.5 text-emerald-400" /> Private &amp; offline
+                            </span>
+                            <span className="inline-flex items-center gap-1.5">
+                                <Lock className="size-3.5 text-emerald-400" /> Your code never leaves your machine
+                            </span>
+                            <span className="inline-flex items-center gap-1.5">
+                                <FaGithub className="size-3.5" /> Open source · MIT
+                            </span>
+                        </p>
+                    </div>
+
                     <div className="border-border/70 bg-card/40 mt-14 overflow-hidden rounded-2xl border p-2 shadow-2xl shadow-black/40">
                         <div className="flex items-center gap-2 px-3 py-2">
                             <span className="size-2.5 rounded-full bg-red-400/70" />
@@ -175,7 +198,7 @@ export default function HomePage() {
                             {[
                                 { title: "Scan", description: "The main process walks your directory, parses manifests, detects technologies, and finds workspace roots." },
                                 { title: "Bridge", description: "A minimal window.api.invoke(channel, ...args) is exposed through contextBridge. No nodeIntegration in the renderer." },
-                                { title: "Render", description: "OrbitProvider turns one scan into every view: Overview, Projects, Workspaces, Technologies, Favorites, and Settings." },
+                                { title: "Render", description: "OrbitProvider turns one scan into every view: Overview, Projects, Workspaces, Technologies, Servers, Favorites, and Settings." },
                             ].map((step, index) => (
                                 <li key={step.title} className="flex gap-4">
                                     <span className="border-primary/40 bg-background text-primary inline-flex size-7 shrink-0 items-center justify-center rounded-full border text-xs font-semibold">
@@ -197,14 +220,14 @@ export default function HomePage() {
                         title="Secure by design"
                         lang="text"
                         code={[
-                            "main process (Node)          preload                renderer (React)",
-                            "────────────────────         ───────                ────────────────",
-                            "scanner ──► ipcMain.handle ──► contextBridge ──► window.api.invoke(...)",
-                            "            (projects:scan)     (window.api)          │",
-                            "                                                        ▼",
-                            "                                              OrbitProvider ──► views",
+                            "main process (Node)               preload                renderer (React)",
+                            "────────────────────              ───────                ────────────────",
+                            "scanner + servers ──► ipcMain.handle ──► contextBridge ──► window.api.invoke(...)",
+                            "                     (projects:scan,      (window.api)          │",
+                            "                      servers:*)                                ▼",
+                            "                                                        OrbitProvider ──► views",
                             "",
-                            "Filesystem access never leaves the main process.",
+                            "Filesystem access and processes never leave the main process.",
                         ].join("\n")}
                     />
                 </div>
@@ -225,10 +248,7 @@ export default function HomePage() {
                             <h3 className="text-foreground text-sm font-semibold">{group.category}</h3>
                             <div className="mt-3 flex flex-wrap gap-1.5">
                                 {group.items.map((item) => (
-                                    <span
-                                        key={item.id}
-                                        className="border-border/70 bg-background/40 text-muted-foreground inline-flex items-center gap-1.5 rounded-md border px-2 py-1 text-xs"
-                                    >
+                                    <span key={item.id} className="border-border/70 bg-background/40 text-muted-foreground inline-flex items-center gap-1.5 rounded-md border px-2 py-1 text-xs">
                                         <TechIcon name={item.id} className="size-3.5" />
                                         {item.label}
                                     </span>
