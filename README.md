@@ -4,7 +4,7 @@ The official documentation and release site for [Orbit](https://github.com/dagis
 
 Live site: [orbit.dagidev.com](https://orbit.dagidev.com)
 
-Built with **Next.js 16** (App Router, Cache Components, React Compiler), **React 19**, **Tailwind CSS v4**, and **GSAP** for motion. Technology logos come from **Devicon** and **Simple Icons**, bundled locally.
+Built with **Next.js 16** (App Router, Cache Components, React Compiler), **React 19**, **Tailwind CSS v4**, and **react-icons**. Technology logos come from **Devicon** and **Simple Icons**, bundled locally.
 
 ## What's here
 

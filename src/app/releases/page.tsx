@@ -30,7 +30,7 @@ export default function ReleasesPage() {
         <div className="mx-auto w-full max-w-5xl flex-1 px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-            <header className="anim-reveal max-w-3xl">
+            <header className="max-w-3xl">
                 <p className="text-primary text-xs font-medium tracking-wider uppercase">Releases</p>
                 <h1 className="text-foreground mt-3 text-4xl font-semibold tracking-tight sm:text-5xl">Download Orbit</h1>
                 <p className="text-muted-foreground mt-4 text-lg leading-8">
@@ -51,7 +51,7 @@ export default function ReleasesPage() {
                 </p>
             </header>
 
-            <div className="anim-reveal mt-6 flex items-start gap-3 rounded-xl border border-amber-500/30 bg-amber-500/5 px-4 py-3">
+            <div className="mt-6 flex items-start gap-3 rounded-xl border border-amber-500/30 bg-amber-500/5 px-4 py-3">
                 <TriangleAlert className="mt-0.5 size-4 shrink-0 text-amber-400" />
                 <p className="text-muted-foreground text-sm">
                     <span className="text-foreground font-medium">Before you download:</span> Orbit detects JavaScript and TypeScript projects by their{" "}
@@ -63,7 +63,7 @@ export default function ReleasesPage() {
                 </p>
             </div>
 
-            <ul className="anim-reveal mt-8 grid gap-3 sm:grid-cols-3">
+            <ul className="mt-8 grid gap-3 sm:grid-cols-3">
                 {FACTS.map((fact) => (
                     <li key={fact.label} className="border-border/70 bg-card/30 flex items-start gap-3 rounded-xl border px-4 py-3">
                         <fact.icon className="text-primary mt-0.5 size-4 shrink-0" />
@@ -75,12 +75,12 @@ export default function ReleasesPage() {
                 ))}
             </ul>
 
-            <div className="anim-scale-in mt-10 space-y-10">
+            <div className="mt-10 space-y-10">
                 <LatestReleaseCard release={latestRelease} />
                 <ReleaseTimeline releases={releases} />
             </div>
 
-            <div className="anim-reveal border-border/70 bg-card/30 mt-10 flex flex-col items-start gap-3 rounded-2xl border p-5 sm:flex-row sm:items-center sm:justify-between">
+            <div className="border-border/70 bg-card/30 mt-10 flex flex-col items-start gap-3 rounded-2xl border p-5 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-start gap-3">
                     <Rss className="text-primary mt-0.5 size-4 shrink-0" />
                     <p className="text-muted-foreground text-sm">

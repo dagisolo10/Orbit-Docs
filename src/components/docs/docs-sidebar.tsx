@@ -25,7 +25,7 @@ export function DocsSidebar() {
                 type="button"
                 onClick={() => setOpen((value) => !value)}
                 aria-expanded={open}
-                className="border-border/70 bg-card/40 anim-reveal text-foreground flex w-full items-center justify-between rounded-lg border px-4 py-3 text-sm font-medium lg:hidden"
+                className="border-border/70 bg-card/40 text-foreground flex w-full items-center justify-between rounded-lg border px-4 py-3 text-sm font-medium lg:hidden"
             >
                 <span>{current ? current.title : "Documentation"}</span>
                 <ChevronDown className={cn("text-muted-foreground size-4 transition-transform", open && "rotate-180")} />
