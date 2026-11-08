@@ -107,17 +107,17 @@ export const docsPages: DocPage[] = [
             {
                 type: "steps",
                 items: [
-                    { title: "Download the AppImage", description: "Grab `Orbit-1.1.0.AppImage` from the [releases page](/releases)." },
+                    { title: "Download the AppImage", description: "Grab `Orbit-1.2.0.AppImage` from the [releases page](/releases)." },
                     { title: "Open a terminal in the download folder", description: "For example, `cd ~/Downloads`." },
-                    { title: "Make it executable", description: "Run `chmod +x Orbit-1.1.0.AppImage`." },
-                    { title: "Run Orbit", description: "Run `./Orbit-1.1.0.AppImage`." },
+                    { title: "Make it executable", description: "Run `chmod +x Orbit-1.2.0.AppImage`." },
+                    { title: "Run Orbit", description: "Run `./Orbit-1.2.0.AppImage`." },
                 ],
             },
             {
                 type: "code",
                 lang: "bash",
                 title: "AppImage",
-                code: ["chmod +x Orbit-1.1.0.AppImage", "./Orbit-1.1.0.AppImage"].join("\n"),
+                code: ["chmod +x Orbit-1.2.0.AppImage", "./Orbit-1.2.0.AppImage"].join("\n"),
             },
             {
                 type: "callout",
@@ -134,11 +134,11 @@ export const docsPages: DocPage[] = [
                 type: "code",
                 lang: "bash",
                 title: "Debian / Ubuntu",
-                code: ["sudo apt install ./Orbit-1.1.0.deb"].join("\n"),
+                code: ["sudo apt install ./Orbit-1.2.0.deb"].join("\n"),
             },
             {
                 type: "paragraph",
-                text: "If your system cannot install local files directly, use `sudo dpkg -i Orbit-1.1.0.deb`, then run `sudo apt-get install -f` to fix any missing dependencies.",
+                text: "If your system cannot install local files directly, use `sudo dpkg -i Orbit-1.2.0.deb`, then run `sudo apt-get install -f` to fix any missing dependencies.",
             },
             { type: "heading", text: "Arch Linux (pacman)" },
             {
@@ -149,7 +149,7 @@ export const docsPages: DocPage[] = [
                 type: "code",
                 lang: "bash",
                 title: "Arch Linux",
-                code: ["sudo pacman -U Orbit-1.1.0.pacman"].join("\n"),
+                code: ["sudo pacman -U Orbit-1.2.0.pacman"].join("\n"),
             },
             {
                 type: "callout",
@@ -186,7 +186,7 @@ export const docsPages: DocPage[] = [
             {
                 type: "callout",
                 variant: "tip",
-                text: "While developing, press `Ctrl/Cmd + K` to focus the search bar from anywhere in the app.",
+                text: "While developing, press `Ctrl/Cmd + K` to focus the search field in the view you are currently using.",
             },
             { type: "heading", text: "Build a distributable" },
             {
@@ -208,7 +208,7 @@ export const docsPages: DocPage[] = [
                 type: "callout",
                 variant: "note",
                 title: "Filenames follow the version",
-                text: "Artifacts are named with the product name and version, for example `Orbit-1.1.0.AppImage`. Replace the version with the release you downloaded.",
+                text: "Artifacts are named with the product name and version, for example `Orbit-1.2.0.AppImage`. Replace the version with the release you downloaded.",
             },
         ],
     },
@@ -261,7 +261,7 @@ export const docsPages: DocPage[] = [
                     ["Technologies", "Your stack, grouped by category, with a jump to every project that uses a given technology."],
                     ["Servers", "Register your development commands and start, stop, or restart them, with live output and detected URLs."],
                     ["Favorites", "Projects you starred for quick access, including projects inside workspaces."],
-                    ["Settings", "Choose the projects directory to scan and rescan, pick the editor and terminal Orbit opens, and see version and links."],
+                    ["Settings", "Choose the projects directory to scan and rescan, pick the editor and terminal Orbit opens, adjust the interface scale, and see version and links."],
                 ],
             },
             { type: "heading", text: "Choosing a projects folder" },
@@ -303,7 +303,7 @@ export const docsPages: DocPage[] = [
         blocks: [
             {
                 type: "paragraph",
-                text: "Orbit is organised into seven views, all driven by a single scan of your projects directory.",
+                text: "Orbit is organised into seven views inside a console-style shell — a collapsible sidebar, a top command bar, and a bottom status ribbon — all driven by a single scan of your projects directory.",
             },
             { type: "heading", text: "Overview dashboard" },
             {
@@ -323,7 +323,7 @@ export const docsPages: DocPage[] = [
                 type: "list",
                 items: [
                     "**Grid or list view** with a segmented control.",
-                    "**Instant search** by project name and path.",
+                    "**Per-view search** by project name and path — each view keeps its own search term for the session.",
                     "**Sorting** by name, path, or technology count.",
                     "**Filters** by technology and by category.",
                     "**Pagination** to keep large workspaces fast.",
@@ -356,13 +356,13 @@ export const docsPages: DocPage[] = [
             { type: "heading", text: "Settings" },
             {
                 type: "paragraph",
-                text: "One Settings view covers where Orbit looks, what it opens, and what version you are running. It is split into three sections.",
+                text: "One Settings view covers where Orbit looks, what it opens, how large the interface is, and what version you are running. A horizontal tab strip shows one section at a time.",
             },
             {
                 type: "table",
                 head: ["Section", "What you can do"],
                 rows: [
-                    ["General", "Choose the projects directory (marked **Default**, **Custom**, or **Unavailable**), re-scan on demand, and see the dark-only theme note."],
+                    ["General", "Choose the projects directory (marked **Default**, **Custom**, or **Unavailable**), re-scan on demand, and adjust the interface scale."],
                     ["Applications", "Pick the code editor and terminal Orbit launches — auto-detected, a known preset, or a custom command — plus the system file manager."],
                     ["About", "Read the app version and open the documentation or source repository."],
                 ],
@@ -373,10 +373,15 @@ export const docsPages: DocPage[] = [
                 title: "Dark by design",
                 text: "Orbit ships a single dark theme tuned for long sessions; there is no light mode to switch to.",
             },
-            { type: "heading", text: "Polished dark UI" },
+            { type: "heading", text: "Interface scale" },
             {
                 type: "paragraph",
-                text: "A responsive React + Tailwind interface with skeletons, empty states, and clear error banners. Brand logos for every technology are bundled locally so icons work fully offline.",
+                text: "The whole interface can be scaled from **80% to 150%** in 10% steps using Electron's native zoom. Use the stepper in **Settings → General** or the status ribbon, or the keyboard shortcuts. Your scale is remembered across launches.",
+            },
+            { type: "heading", text: "Console interface" },
+            {
+                type: "paragraph",
+                text: "Orbit uses a dense, console-inspired design language: a collapsible sidebar, a top command bar that names the active module, and a bottom status ribbon with live readouts. Grid project cards pair a monogram and project details with a hairline stack footer that shows the technology count, category roles, and up to three brand-icon badges. Brand logos for every technology are bundled locally so icons work fully offline; unknown technologies fall back to a neutral monogram.",
             },
         ],
     },
@@ -821,13 +826,25 @@ export const docsPages: DocPage[] = [
             {
                 type: "table",
                 head: ["Action", "Shortcut"],
-                rows: [["Focus and select the search bar", "Ctrl / Cmd + K"]],
+                rows: [
+                    ["Focus the active view's search field", "Ctrl / Cmd + K"],
+                    ["Collapse or expand the sidebar", "Ctrl / Cmd + B"],
+                    ["Increase interface scale", "Shift + +"],
+                    ["Decrease interface scale", "Shift + -"],
+                    ["Reset interface scale to 100%", "Shift + 0"],
+                ],
             },
             {
                 type: "callout",
                 variant: "note",
                 title: "Search behaviour",
-                text: "The hotkey focuses the search input and selects its contents. Pressing it again while focused re-selects the text so you can start typing immediately.",
+                text: "Search belongs to each view. Projects, Favorites, Workspaces, and Technologies keep independent terms for the session, and the hotkey focuses and selects the field in the view you are currently using. Pressing it again while focused re-selects the text so you can start typing immediately.",
+            },
+            {
+                type: "callout",
+                variant: "tip",
+                title: "Interface scale",
+                text: "Scaling uses Electron's native zoom, so every surface scales together. It runs from 80% to 150% in 10% steps and is remembered across launches.",
             },
         ],
     },
@@ -906,8 +923,8 @@ export const docsPages: DocPage[] = [
                     "│     ├─ app/          # Entry point and global styles",
                     "│     ├─ components/   # Views and UI primitives",
                     "│     ├─ contexts/     # Context definitions",
-                    "│     ├─ providers/    # State providers (Orbit data, toasts)",
-                    "│     ├─ hooks/        # Reusable hooks (search hotkey, favorites, etc.)",
+                    "│     ├─ providers/    # State providers (Orbit data, interface scale, toasts)",
+                    "│     ├─ hooks/        # Reusable hooks (per-view search, hotkeys, favorites, etc.)",
                     "│     ├─ lib/          # Formatting, technology labels, and icon mappings",
                     "│     └─ services/     # Renderer-side adapter over the preload bridge",
                     "└─ shared/             # Types shared across main, preload, and renderer",
@@ -1011,9 +1028,12 @@ export const docsPages: DocPage[] = [
             {
                 type: "list",
                 items: [
+                    "**Console UI redesign** — a new shell with a collapsible sidebar, top command bar, and status ribbon, plus reworked views, dialogs, and project cards.",
+                    "**Interface scale** — native zoom from 80% to 150% in 10% steps, with keyboard shortcuts and a persisted setting.",
+                    "**Per-view search** — Projects, Favorites, Workspaces, and Technologies each keep their own search term for the session.",
                     "**Development server manager** — register your dev commands and start, stop, and restart them, with live output and automatic localhost URL detection.",
                     "**Configurable projects directory** — pick the folder Orbit scans from Settings, with your choice persisted across restarts.",
-                    "**Settings page** — General (projects directory, re-scan, dark-only theme), Applications (editor and terminal), and About sections.",
+                    "**Settings tabs** — General (projects directory, re-scan, interface scale), Applications (editor and terminal), and About sections, shown one at a time.",
                     "**Editor & terminal preferences** — auto-detect, pin a known application, or enter a custom command, with Flatpak and Snap wrapper detection.",
                 ],
             },

@@ -38,7 +38,7 @@ export function releaseAssetUrl(tag: string, filename: string): string {
     return `${GITHUB_RELEASE}/download/${tag}/${filename}`;
 }
 
-/** The in-site release-notes route for a given release tag (e.g. `v1.1.0`). */
+/** The in-site release-notes route for a given release tag (e.g. `v1.2.0`). */
 export function releaseDetailPath(tag: string): string {
     return `/releases/${tag}`;
 }
@@ -50,11 +50,46 @@ export function getRelease(tag: string): Release | undefined {
 
 export const releases: Release[] = [
     {
+        version: "1.2.0",
+        tag: "v1.2.0",
+        name: "Orbit 1.2 — console UI redesign",
+        date: "2026-11-08",
+        latest: true,
+        summary:
+            "Orbit has been rebuilt around a console-inspired interface: a new shell with a sidebar, top command bar, and status ribbon, reworked views and dialogs, and a denser project card. Search now lives inside each view, and the entire interface can be scaled natively from 80% to 150%.",
+        highlights: [
+            "A complete interface redesign in a console-inspired visual language",
+            "A new shell with a sidebar, top command bar, and telemetry status ribbon",
+            "Native interface scaling from 80% to 150% with keyboard shortcuts",
+            "Search moved into each view, with independent terms kept for the session",
+            "Reworked Overview, Projects, Workspaces, Technologies, Favorites, Servers, and Settings",
+            "Settings converted to a single-section tab strip",
+            "Technology brand icons everywhere, with a neutral monogram fallback",
+        ],
+        changes: [
+            { type: "added", text: "A new application shell with a collapsible sidebar, a top command bar showing the active module, and a bottom status ribbon with scan and interface-scale readouts." },
+            { type: "added", text: "Native interface scaling from **80% to 150%** in 10% steps, persisted at `orbit.interfaceScale` and available from both Settings and the status ribbon." },
+            { type: "added", text: "Keyboard shortcuts for interface scale: `Shift` + `+` to increase, `Shift` + `-` to decrease, and `Shift` + `0` to reset." },
+            { type: "added", text: "Per-view search fields for Projects, Favorites, Workspaces, and Technologies, with each view keeping its own term for the session." },
+            { type: "changed", text: "`Ctrl/Cmd + K` now focuses the active view's search field instead of a single global search bar." },
+            { type: "changed", text: "Rebuilt the Overview, Projects, Workspaces, Technologies, Favorites, Servers, and Settings views in the new visual language, including new empty, loading, and error states." },
+            { type: "changed", text: "Converted Settings from a stacked index into a horizontal tab strip that shows exactly one section at a time, with keyboard navigation." },
+            { type: "changed", text: "Redesigned the grid project card around a header row and a hairline stack footer with a technology count, category roles, and a `+N` overflow chip." },
+            { type: "changed", text: "Technology badges now always use brand icons; unknown technologies fall back to a neutral monogram instead of a category color marker." },
+            { type: "changed", text: "Updated dialogs, dropdowns, buttons, tooltips, pagination, and other UI primitives to match the new design system." },
+            { type: "fixed", text: "Improved layout consistency across grid and workspace cards, including matching skeletons and anchored footers." },
+        ],
+        assets: [
+            { platform: "linux", label: "AppImage", format: "Portable · no install needed", filename: "Orbit-1.2.0.AppImage", recommended: true },
+            { platform: "linux", label: "Debian / Ubuntu", format: "deb", filename: "Orbit-1.2.0.deb" },
+            { platform: "linux", label: "Arch Linux", format: "pacman", filename: "Orbit-1.2.0.pacman" },
+        ],
+    },
+    {
         version: "1.1.0",
         tag: "v1.1.0",
         name: "Orbit 1.1 — development server manager",
         date: "2026-10-14",
-        latest: true,
         summary:
             "Orbit now runs your development servers, too. Register the long-running commands you use every day and start, stop, and restart them from a new Servers view, with live output streamed into a built-in terminal and localhost URLs detected automatically.",
         highlights: [

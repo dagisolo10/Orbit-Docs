@@ -19,6 +19,7 @@ import {
     Star,
     Terminal,
     TriangleAlert,
+    ZoomIn,
     type LucideIcon,
 } from "lucide-react";
 import Link from "next/link";
@@ -33,7 +34,16 @@ const FEATURES: { icon: LucideIcon; title: string; description: string }[] = [
     { icon: Layers, title: "Technology detection", description: "Read dependencies and devDependencies to detect the real stack each project uses, grouped into clear categories." },
     { icon: Boxes, title: "Workspace awareness", description: "Monorepos and multi-package workspaces are detected and grouped, while standalone projects stay separate." },
     { icon: Sparkles, title: "Brand logos", description: "Every technology is shown with its real logo via Devicon and Simple Icons, bundled locally for full offline support." },
-    { icon: Search, title: "Instant search & filters", description: "Grid or list views with instant search, sorting, technology and category filters, and pagination." },
+    {
+        icon: Search,
+        title: "Per-view search & filters",
+        description: "Projects, Favorites, Workspaces, and Technologies each keep their own search term, alongside sorting, technology and category filters, and pagination.",
+    },
+    {
+        icon: ZoomIn,
+        title: "Interface scale",
+        description: "Scale the entire interface natively from 80% to 150% in 10% steps, with keyboard shortcuts and a setting remembered across launches.",
+    },
     { icon: Star, title: "Favorites", description: "Star the projects you use most for quick access, including projects that live inside a workspace." },
     { icon: Terminal, title: "Quick actions", description: "Open any project or workspace root in your editor or terminal, reveal it in the file manager, or copy its path." },
     {
@@ -47,7 +57,11 @@ const FEATURES: { icon: LucideIcon; title: string; description: string }[] = [
         description: "Pick your editor and terminal from presets or a custom command, with Flatpak and Snap detection. Orbit can also auto-detect them for you.",
     },
     { icon: RefreshCw, title: "Rescan on demand", description: "Refresh your workspace whenever you add or change projects. Failures never wipe out your last good results." },
-    { icon: Moon, title: "Polished dark UI", description: "A responsive React and Tailwind interface with skeletons, empty states, and clear error banners." },
+    {
+        icon: Moon,
+        title: "Console interface",
+        description: "A console-inspired shell with a collapsible sidebar, top command bar, status ribbon, and brand technology icons with a neutral fallback.",
+    },
 ];
 
 const TECH_GROUPS: { category: string; items: { id: string; label: string }[] }[] = [

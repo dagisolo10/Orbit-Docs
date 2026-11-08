@@ -10,7 +10,7 @@ Built with **Next.js 16** (App Router, Cache Components, React Compiler), **Reac
 
 - **Landing page** (`/`) — product overview, features, architecture, and technology detection.
 - **Documentation** (`/docs`) — getting started, installation, feature guides, supported projects and limitations, and reference material.
-- **Releases** (`/releases`) — a concise index of every Orbit release. Each release also has its own page at `/releases/<tag>` (for example `/releases/v1.1.0`) with the full notes and downloads.
+- **Releases** (`/releases`) — a concise index of every Orbit release. Each release also has its own page at `/releases/<tag>` (for example `/releases/v1.2.0`) with the full notes and downloads.
 
 ## Getting started
 
@@ -62,7 +62,7 @@ Inline text supports a small subset of Markdown — `` `code` ``, `**bold**`, an
 
 ### Publishing a release
 
-1. Add a new entry to the **top** of the `releases` array in `src/content/releases.ts` with its `version`, `tag` (for example `v1.1.0`), `name`, `date`, `summary`, `highlights`, `changes`, and `assets`, and mark it `latest: true` (remove `latest` from the previous entry).
+1. Add a new entry to the **top** of the `releases` array in `src/content/releases.ts` with its `version`, `tag` (for example `v1.2.0`), `name`, `date`, `summary`, `highlights`, `changes`, and `assets`, and mark it `latest: true` (remove `latest` from the previous entry).
 2. Update `version` and `releaseDate` in `src/lib/site.ts`.
 
 That is all that is needed. The `/releases` index lists the release automatically, a dedicated page is generated at `/releases/<tag>`, and the sitemap, internal links, and "latest" badge all update from the same data. Download links point at GitHub Releases using each artifact's filename.
